@@ -13,7 +13,7 @@ export interface CartItem {
   quantity: number;
 }
 
-// 購物車上��文類型
+// 購物車上下文類型
 interface CartContextType {
   items: CartItem[];
   addToCart: (product: Product, quantity: number) => void;
@@ -73,21 +73,41 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         (item) => item.product.id === product.id,
       );
 
+      let newItems;
       if (existingItemIndex > -1) {
         // 如果商品已存在，更新數量
         const updatedItems = [...currentItems];
         updatedItems[existingItemIndex].quantity += quantity;
-        return updatedItems;
+        newItems = updatedItems;
       } else {
         // 否則添加新商品
-        return [...currentItems, { product, quantity }];
+        newItems = [...currentItems, { product, quantity }];
       }
+
+      // 立即更新localStorage
+      try {
+        localStorage.setItem("cart", JSON.stringify(newItems));
+        console.log("購物車已即時更新到localStorage，項目數:", newItems.length);
+      } catch (error) {
+        console.error("更新購物車到localStorage失敗:", error);
+      }
+
+      return newItems;
     });
   };
 
   // 從購物車移除商品
   const removeFromCart = (productId: string) => {
-    setItems(items.filter((item) => item.product.id !== productId));
+    const newItems = items.filter((item) => item.product.id !== productId);
+    setItems(newItems);
+
+    // 立即更新localStorage
+    try {
+      localStorage.setItem("cart", JSON.stringify(newItems));
+      console.log("移除商品後更新localStorage，剩餘項目:", newItems.length);
+    } catch (error) {
+      console.error("移除商品後更新localStorage失敗:", error);
+    }
   };
 
   // 更新購物車中商品的數量
@@ -97,16 +117,31 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       return;
     }
 
-    setItems(
-      items.map((item) =>
-        item.product.id === productId ? { ...item, quantity } : item,
-      ),
+    const newItems = items.map((item) =>
+      item.product.id === productId ? { ...item, quantity } : item,
     );
+
+    setItems(newItems);
+
+    // 立即更新localStorage
+    try {
+      localStorage.setItem("cart", JSON.stringify(newItems));
+      console.log("更新數量後同步localStorage，項目數:", newItems.length);
+    } catch (error) {
+      console.error("更新數量後同步localStorage失敗:", error);
+    }
   };
 
   // 清空購物車
   const clearCart = () => {
     setItems([]);
+    // 清空localStorage中的購物車
+    try {
+      localStorage.removeItem("cart");
+      console.log("購物車已清空");
+    } catch (error) {
+      console.error("清空購物車localStorage失敗:", error);
+    }
   };
 
   // 計算購物車中的總項目數

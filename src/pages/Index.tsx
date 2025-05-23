@@ -4,9 +4,13 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/products/ProductCard";
 import { getFeaturedProducts } from "@/data/products";
+import { useInitCartSync } from "@/hooks/useInitCartSync";
 
 const Index = () => {
   const featuredProducts = getFeaturedProducts();
+
+  // 確保購物車同步
+  useInitCartSync();
 
   return (
     <Layout>

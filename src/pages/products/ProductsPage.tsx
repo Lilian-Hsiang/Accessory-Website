@@ -7,6 +7,7 @@ import {
   products as allProducts,
 } from "@/data/products";
 import { Product, ProductCategory, getCategoryFromPath } from "@/types/product";
+import { useInitCartSync } from "@/hooks/useInitCartSync";
 
 const ProductsPage = () => {
   const { category } = useParams<{ category: string }>();
@@ -14,6 +15,9 @@ const ProductsPage = () => {
   const [sortBy, setSortBy] = useState<string>("default");
   const [productCategory, setProductCategory] =
     useState<ProductCategory | null>(null);
+
+  // 確保購物車同步
+  useInitCartSync();
 
   useEffect(() => {
     if (category) {
@@ -24,7 +28,7 @@ const ProductsPage = () => {
         let filteredProducts = getProductsByCategory(categoryName);
         sortProducts(filteredProducts, sortBy);
       } else {
-        // 如果找不到對應的分類，顯示所有產品
+        // 如果找不到對應的分類���顯示所有產品
         sortProducts(allProducts, sortBy);
       }
     } else {
@@ -95,7 +99,7 @@ const ProductsPage = () => {
                 className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               >
                 <option value="default">預設排序</option>
-                <option value="price-low">價格：低至��</option>
+                <option value="price-low">價格：低至高</option>
                 <option value="price-high">價格：高至低</option>
                 <option value="name-asc">名稱：A-Z</option>
                 <option value="name-desc">名稱：Z-A</option>

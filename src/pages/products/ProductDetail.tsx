@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import { getProductById } from "@/data/products";
 import { Product } from "@/types/product";
 import { useCart } from "@/contexts/CartContext";
+import { useInitCartSync } from "@/hooks/useInitCartSync";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
@@ -16,6 +17,9 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const { addToCart } = useCart();
   const navigate = useNavigate();
+
+  // 確保購物車同步
+  useInitCartSync();
 
   useEffect(() => {
     if (id) {

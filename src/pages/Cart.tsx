@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import CartItem from "@/components/cart/CartItem";
 import { useCart } from "@/contexts/CartContext";
+import { useInitCartSync } from "@/hooks/useInitCartSync";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
@@ -11,6 +12,20 @@ const Cart = () => {
   const { items, updateQuantity, removeFromCart, getTotalPrice, clearCart } =
     useCart();
   const [processingOrder, setProcessingOrder] = useState(false);
+
+  // 使用購物車同步鉤子確保數據一致性
+  useInitCartSync();
+
+  // 頁面加載時檢查購物車狀態
+  useEffect(() => {
+    console.log("購物車頁面載入，項目數:", items.length);
+    // 檢查localStorage中的購物車
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      const parsedCart = JSON.parse(savedCart);
+      console.log("localStorage中的項目數:", parsedCart.length);
+    }
+  }, [items.length]);
 
   // 處理結帳
   const handleCheckout = () => {
@@ -23,7 +38,7 @@ const Cart = () => {
 
     // 模擬結帳處理
     setTimeout(() => {
-      toast.success("��單已成功提交！感謝您的購買。");
+      toast.success("訂單已成功提交！感謝您的購買。");
       clearCart();
       setProcessingOrder(false);
     }, 1500);
@@ -135,6 +150,12 @@ const Cart = () => {
                   <Link
                     to="/products/necklaces"
                     className="text-sm text-primary hover:underline"
+                    onClick={() => {
+                      // 在跳轉前確保購物車數據被正確保存
+                      const currentCart = JSON.stringify(items);
+                      localStorage.setItem("cart", currentCart);
+                      console.log("跳轉前保存購物車:", items.length, "項目");
+                    }}
                   >
                     繼續購物
                   </Link>
