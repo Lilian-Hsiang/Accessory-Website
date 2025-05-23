@@ -48,17 +48,35 @@ const ProductDetail = () => {
       try {
         addToCart(product, quantity);
         toast.success(`已將 ${quantity} 件 ${product.name} 加入購物車`);
-
-        // 驗證購物車已更新
-        const cartItems = localStorage.getItem("cart");
-        console.log(
-          "購物車已更新:",
-          cartItems ? JSON.parse(cartItems).length : 0,
-          "項目",
-        );
       } catch (error) {
         console.error("加入購物車失敗:", error);
         toast.error("加入購物車失敗，請稍後再試");
+      }
+    }
+  };
+
+  // 處理立即購買
+  const handleBuyNow = () => {
+    if (product) {
+      try {
+        // 添加到購物車
+        addToCart(product, quantity);
+
+        // 打印調試信息
+        console.log("立即購買: 添加商品到購物車完成");
+
+        // 顯示進度提示
+        toast.loading("正在準備結帳...", { id: "checkout-loading" });
+
+        // 使用較長的延遲確保數據同步完成
+        setTimeout(() => {
+          toast.dismiss("checkout-loading");
+          console.log("立即購買: 準備導航到購物車頁面");
+          navigate("/cart");
+        }, 500);
+      } catch (error) {
+        console.error("立即購買失敗:", error);
+        toast.error("處理訂單時發生錯誤，請稍後再試");
       }
     }
   };

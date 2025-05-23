@@ -5,7 +5,15 @@ import React, {
   useState,
   useEffect,
   ReactNode,
+  useCallback,
 } from "react";
+import {
+  getStoredCart,
+  storeCart,
+  clearStoredCart,
+  validateCart,
+  debugLocalStorage,
+} from "@/lib/cartStorage";
 
 // 購物車項目類型
 export interface CartItem {
@@ -22,6 +30,8 @@ interface CartContextType {
   clearCart: () => void;
   getTotalItems: () => number;
   getTotalPrice: () => number;
+  syncCart: () => void; // 新增：顯性同步購物車
+  debugCart: () => { memory: CartItem[]; storage: CartItem[] }; // 新增：用於調試
 }
 
 // 創建上下文
@@ -34,39 +44,89 @@ interface CartProviderProps {
 
 // 購物車提供者組件
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  // 從本地存儲加載購物車或初始化空購物車
+  // 從本地存儲加載購物車
   const [items, setItems] = useState<CartItem[]>(() => {
-    try {
-      const savedCart = localStorage.getItem("cart");
-      if (savedCart) {
-        // 嘗試解析存儲的購物車數據
-        const parsedCart = JSON.parse(savedCart);
-        // 確認解析後的數據是一個數組
-        if (Array.isArray(parsedCart) && parsedCart.length > 0) {
-          return parsedCart;
-        }
-      }
-      return [];
-    } catch (error) {
-      console.error("從localStorage加載購物車失敗:", error);
-      return [];
-    }
+    return getStoredCart();
   });
 
-  // 當購物車更新時保存到本地存儲
-  useEffect(() => {
-    try {
-      // 確保items是有效的並且可以被序列化
-      localStorage.setItem("cart", JSON.stringify(items));
-      // 可以在開發模式下驗證存儲是否成功
-      console.log("購物車已保存，項目數:", items.length);
-    } catch (error) {
-      console.error("儲存購物車到localStorage失敗:", error);
+  // 將內存中的購物車數據同步到存儲
+  const syncCartToStorage = useCallback(() => {
+    if (items.length === 0) return;
+
+    console.log("正在同步購物車數據到localStorage...", items.length, "個項目");
+    const success = storeCart(items);
+    if (success) {
+      console.log("購物車同步成功!");
     }
   }, [items]);
 
+  // 顯性同步方法，可以在需要的地方主動調用
+  const syncCart = useCallback(() => {
+    console.log("手動同步購物車...");
+
+    // 從存儲讀取，確保最新數據
+    const storedItems = getStoredCart();
+
+    // 如果存儲中有數據且內存中沒有，使用存儲中的數據
+    if (storedItems.length > 0 && items.length === 0) {
+      console.log("從存儲恢復購物車數據:", storedItems.length, "個項目");
+      setItems(storedItems);
+      return;
+    }
+
+    // 如果內存中有數據，確保寫入存儲
+    if (items.length > 0) {
+      console.log("將內存中的購物車寫入存儲:", items.length, "個項目");
+      storeCart(items);
+    }
+  }, [items]);
+
+  // 當購物車更新時保存到本地存儲
+  useEffect(() => {
+    syncCartToStorage();
+  }, [items, syncCartToStorage]);
+
+  // 頁面加載時檢查購物車
+  useEffect(() => {
+    console.log("購物車提供者初始化，檢查存儲...");
+
+    const storedCart = getStoredCart();
+    if (validateCart(storedCart) && storedCart.length > 0) {
+      console.log("找到有效的存儲購物車數據:", storedCart.length, "個項目");
+      if (items.length === 0) {
+        console.log("使用存儲的購物車數據");
+        setItems(storedCart);
+      }
+    } else if (items.length > 0) {
+      console.log("存儲中沒有有效購物車，但內存中有，正在保存...");
+      storeCart(items);
+    }
+
+    // 在瀏覽器關閉或刷新時，確保購物車被保存
+    const handleBeforeUnload = () => {
+      if (items.length > 0) {
+        storeCart(items);
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [items]);
+
+  // 調試用：獲取當前購物車狀態
+  const debugCart = useCallback(() => {
+    return {
+      memory: items,
+      storage: getStoredCart(),
+    };
+  }, [items]);
+
   // 添加商品到購物車
-  const addToCart = (product: Product, quantity: number) => {
+  const addToCart = useCallback((product: Product, quantity: number) => {
+    console.log("添加商品到購物車:", product.name, "數量:", quantity);
+
     setItems((currentItems) => {
       // 檢查商品是否已在購物車中
       const existingItemIndex = currentItems.findIndex(
@@ -85,77 +145,69 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       }
 
       // 立即更新localStorage
-      try {
-        localStorage.setItem("cart", JSON.stringify(newItems));
-        console.log("購物車已即時更新到localStorage，項目數:", newItems.length);
-      } catch (error) {
-        console.error("更新購物車到localStorage失敗:", error);
-      }
+      storeCart(newItems);
+      console.log("購物車已更新，目前有", newItems.length, "個項目");
 
       return newItems;
     });
-  };
+  }, []);
 
   // 從購物車移除商品
-  const removeFromCart = (productId: string) => {
-    const newItems = items.filter((item) => item.product.id !== productId);
-    setItems(newItems);
+  const removeFromCart = useCallback((productId: string) => {
+    console.log("從購物車移除商品:", productId);
 
-    // 立即更新localStorage
-    try {
-      localStorage.setItem("cart", JSON.stringify(newItems));
-      console.log("移除商品後更新localStorage，剩餘項目:", newItems.length);
-    } catch (error) {
-      console.error("移除商品後更新localStorage失敗:", error);
-    }
-  };
+    setItems((currentItems) => {
+      const newItems = currentItems.filter(
+        (item) => item.product.id !== productId,
+      );
+      storeCart(newItems);
+      console.log("商品已移除，剩餘", newItems.length, "個項目");
+      return newItems;
+    });
+  }, []);
 
   // 更新購物車中商品的數量
-  const updateQuantity = (productId: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeFromCart(productId);
-      return;
-    }
+  const updateQuantity = useCallback(
+    (productId: string, quantity: number) => {
+      console.log("更新購物車商品數量:", productId, "新數量:", quantity);
 
-    const newItems = items.map((item) =>
-      item.product.id === productId ? { ...item, quantity } : item,
-    );
+      if (quantity <= 0) {
+        removeFromCart(productId);
+        return;
+      }
 
-    setItems(newItems);
+      setItems((currentItems) => {
+        const newItems = currentItems.map((item) =>
+          item.product.id === productId ? { ...item, quantity } : item,
+        );
 
-    // 立即更新localStorage
-    try {
-      localStorage.setItem("cart", JSON.stringify(newItems));
-      console.log("更新數量後同步localStorage，項目數:", newItems.length);
-    } catch (error) {
-      console.error("更新數量後同步localStorage失敗:", error);
-    }
-  };
+        storeCart(newItems);
+        console.log("商品數量已更新");
+        return newItems;
+      });
+    },
+    [removeFromCart],
+  );
 
   // 清空購物車
-  const clearCart = () => {
+  const clearCart = useCallback(() => {
+    console.log("清空購物車");
     setItems([]);
-    // 清空localStorage中的購物車
-    try {
-      localStorage.removeItem("cart");
-      console.log("購物車已清空");
-    } catch (error) {
-      console.error("清空購物車localStorage失敗:", error);
-    }
-  };
+    clearStoredCart();
+  }, []);
 
   // 計算購物車中的總項目數
-  const getTotalItems = () => {
+  const getTotalItems = useCallback(() => {
     return items.reduce((total, item) => total + item.quantity, 0);
-  };
+  }, [items]);
 
   // 計算購物車中的總價格
-  const getTotalPrice = () => {
+  const getTotalPrice = useCallback(() => {
     return items.reduce(
       (total, item) => total + item.product.price * item.quantity,
       0,
     );
-  };
+  }, [items]);
 
   // 提供上下文值
   const contextValue: CartContextType = {
@@ -166,6 +218,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     clearCart,
     getTotalItems,
     getTotalPrice,
+    syncCart,
+    debugCart,
   };
 
   return (
