@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { CartProvider } from "./contexts/CartContext";
+import { CheckoutProvider } from "./contexts/CheckoutContext";
 import { getStoredCart } from "./lib/cartStorage";
 
 // 購物車診斷功能
@@ -27,7 +28,7 @@ const initializeApp = () => {
     if (legacyCart) {
       try {
         const parsedLegacyCart = JSON.parse(legacyCart);
-        console.log("發現舊購物車數據:", parsedLegacyCart.length, "件商品");
+        console.log("發現舊購物車��據:", parsedLegacyCart.length, "件商品");
 
         // 如果新存儲為空但舊存儲有數據，遷移數據
         if (storedCart.length === 0 && parsedLegacyCart.length > 0) {
@@ -54,7 +55,9 @@ const initializeApp = () => {
   ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
       <CartProvider>
-        <App />
+        <CheckoutProvider>
+          <App />
+        </CheckoutProvider>
       </CartProvider>
     </React.StrictMode>,
   );

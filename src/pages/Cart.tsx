@@ -93,14 +93,9 @@ const Cart = () => {
         return;
       }
 
-      // 模擬結帳處理
-      setTimeout(() => {
-        toast.success(
-          `訂單已成功提交！總金額: ${formatPrice(getTotalPrice())}`,
-        );
-        clearCart();
-        setProcessingOrder(false);
-      }, 1000);
+      // 導航到結帳頁面
+      navigate("/checkout");
+      setProcessingOrder(false);
     }, 300);
   };
 
