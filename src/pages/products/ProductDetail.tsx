@@ -21,6 +21,7 @@ const ProductDetail = () => {
   // 確保購物車同步
   useInitCartSync();
 
+  // 加載產品數據
   useEffect(() => {
     if (id) {
       setLoading(true);
@@ -62,35 +63,14 @@ const ProductDetail = () => {
         // 添加到購物車
         addToCart(product, quantity);
 
-        // 打印調試信息
-        console.log("立即購買: 添加商品到購物車完成");
-
-        // 顯示進度提示
+        // 顯示加載提示
         toast.loading("正在準備結帳...", { id: "checkout-loading" });
 
-        // 使用較長的延遲確保數據同步完成
+        // 給數據同步一點時間
         setTimeout(() => {
           toast.dismiss("checkout-loading");
-          console.log("立即購買: 準備導航到購物車頁面");
           navigate("/cart");
         }, 500);
-      } catch (error) {
-        console.error("立即購買失敗:", error);
-        toast.error("處理訂單時發生錯誤，請稍後再試");
-      }
-    }
-  };
-
-  // 處理立即購買
-  const handleBuyNow = () => {
-    if (product) {
-      try {
-        addToCart(product, quantity);
-
-        // 確保數據已儲存到localStorage後再導航
-        setTimeout(() => {
-          navigate("/cart");
-        }, 100);
       } catch (error) {
         console.error("立即購買失敗:", error);
         toast.error("處理訂單時發生錯誤，請稍後再試");
@@ -108,6 +88,7 @@ const ProductDetail = () => {
     }).format(price);
   };
 
+  // 加載中顯示
   if (loading) {
     return (
       <Layout>
@@ -120,6 +101,7 @@ const ProductDetail = () => {
     );
   }
 
+  // 產品未找到
   if (!product) {
     return (
       <Layout>
@@ -134,6 +116,7 @@ const ProductDetail = () => {
     );
   }
 
+  // 渲染產品詳情
   return (
     <Layout>
       <div className="container mx-auto px-4 py-16">
