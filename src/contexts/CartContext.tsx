@@ -13,7 +13,7 @@ export interface CartItem {
   quantity: number;
 }
 
-// 購物車上下文類型
+// 購物車上��文類型
 interface CartContextType {
   items: CartItem[];
   addToCart: (product: Product, quantity: number) => void;
@@ -36,13 +36,33 @@ interface CartProviderProps {
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   // 從本地存儲加載購物車或初始化空購物車
   const [items, setItems] = useState<CartItem[]>(() => {
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
+    try {
+      const savedCart = localStorage.getItem("cart");
+      if (savedCart) {
+        // 嘗試解析存儲的購物車數據
+        const parsedCart = JSON.parse(savedCart);
+        // 確認解析後的數據是一個數組
+        if (Array.isArray(parsedCart) && parsedCart.length > 0) {
+          return parsedCart;
+        }
+      }
+      return [];
+    } catch (error) {
+      console.error("從localStorage加載購物車失敗:", error);
+      return [];
+    }
   });
 
   // 當購物車更新時保存到本地存儲
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(items));
+    try {
+      // 確保items是有效的並且可以被序列化
+      localStorage.setItem("cart", JSON.stringify(items));
+      // 可以在開發模式下驗證存儲是否成功
+      console.log("購物車已保存，項目數:", items.length);
+    } catch (error) {
+      console.error("儲存購物車到localStorage失敗:", error);
+    }
   }, [items]);
 
   // 添加商品到購物車

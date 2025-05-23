@@ -41,16 +41,38 @@ const ProductDetail = () => {
   // 處理加入購物車
   const handleAddToCart = () => {
     if (product) {
-      addToCart(product, quantity);
-      toast.success(`已將 ${quantity} 件 ${product.name} 加入購物車`);
+      try {
+        addToCart(product, quantity);
+        toast.success(`已將 ${quantity} 件 ${product.name} 加入購物車`);
+
+        // 驗證購物車已更新
+        const cartItems = localStorage.getItem("cart");
+        console.log(
+          "購物車已更新:",
+          cartItems ? JSON.parse(cartItems).length : 0,
+          "項目",
+        );
+      } catch (error) {
+        console.error("加入購物車失敗:", error);
+        toast.error("加入購物車失敗，請稍後再試");
+      }
     }
   };
 
   // 處理立即購買
   const handleBuyNow = () => {
     if (product) {
-      addToCart(product, quantity);
-      navigate("/cart");
+      try {
+        addToCart(product, quantity);
+
+        // 確保數據已儲存到localStorage後再導航
+        setTimeout(() => {
+          navigate("/cart");
+        }, 100);
+      } catch (error) {
+        console.error("立即購買失敗:", error);
+        toast.error("處理訂單時發生錯誤，請稍後再試");
+      }
     }
   };
 

@@ -17,8 +17,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    addToCart(product, 1);
-    toast.success(`已將 ${name} 加入購物車`);
+    try {
+      addToCart(product, 1);
+      toast.success(`已將 ${name} 加入購物車`);
+      // 驗證數據已存入本地存儲
+      const cartItems = localStorage.getItem("cart");
+      console.log(
+        "購物車已更新:",
+        cartItems ? JSON.parse(cartItems).length : 0,
+        "項目",
+      );
+    } catch (error) {
+      console.error("加入購物車失敗:", error);
+      toast.error("加入購物車失敗，請稍後再試");
+    }
   };
 
   // 格式化價格，加上千位分隔符
