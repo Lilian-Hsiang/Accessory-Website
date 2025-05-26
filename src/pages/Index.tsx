@@ -6,6 +6,8 @@ import ProductCard from "@/components/products/ProductCard";
 import { getFeaturedProducts } from "@/data/products";
 import { getCategoryPath } from "@/types/product";
 import acc1 from '../assets/homePage/acc1.jpg';
+import acc2 from '../assets/homePage/acc2.jpg';
+import designer from '../assets/homePage/designer.jpg';
 import necklace1 from '../assets/homePage/necklace1.jpg';
 import earrings1 from '../assets/homePage/earrings1.jpg';
 import ring1 from '../assets/homePage/ring1.jpg';
@@ -309,13 +311,13 @@ const Index = () => {
             </div>
             <div className="relative">
               <img
-                src="https://via.placeholder.com/600x400/F3F4F6/000000?text=品牌故事"
+                src={acc2}
                 alt="品牌故事"
                 className="rounded-lg"
               />
               <div className="absolute -bottom-4 -left-4 w-40 h-40 border-8 border-white rounded-full overflow-hidden">
                 <img
-                  src="https://via.placeholder.com/200x200/E5E7EB/000000?text=細節"
+                  src={designer}
                   alt="珠寶細節"
                   className="w-full h-full object-cover"
                 />
