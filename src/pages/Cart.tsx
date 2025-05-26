@@ -1,19 +1,83 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom"; // 添加 useNavigate 導入
 import Layout from "@/components/layout/Layout";
 import CartItem from "@/components/cart/CartItem";
 import { useCart } from "@/contexts/CartContext";
+import { useInitCartSync } from "@/hooks/useInitCartSync";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag, ArrowRight } from "lucide-react";
+import { ShoppingBag, ArrowRight, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
+import { getStoredCart } from "@/lib/cartStorage";
 
 const Cart = () => {
-  const { items, updateQuantity, removeFromCart, getTotalPrice, clearCart } =
-    useCart();
+  const navigate = useNavigate(); // 使用 useNavigate hook
+  const {
+    items,
+    updateQuantity,
+    removeFromCart,
+    getTotalPrice,
+    clearCart,
+    syncCart,
+    debugCart,
+  } = useCart();
   const [processingOrder, setProcessingOrder] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // 使用購物車同步鉤子確保數據一致性
+  useInitCartSync();
+
+  // 頁面加載時主動同步購物車
+  useEffect(() => {
+    console.log("購物車頁面加載中...");
+
+    // 同步購物車並顯示加載狀態
+    setIsLoading(true);
+
+    // 獲取存儲中的購物車
+    const storedCart = getStoredCart();
+    console.log("購物車頁面檢測到存儲購物車項目數:", storedCart.length);
+
+    // 強制同步購物車
+    syncCart();
+
+    // 給同步一些時間完成
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      console.log("購物車頁面準備就緒，項目數:", items.length);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [syncCart, items.length]);
+
+  // 檢查購物車數據一致性
+  useEffect(() => {
+    const debugInfo = debugCart();
+    console.log("購物車調試信息:", {
+      記憶體項目數: debugInfo.memory.length,
+      存儲項目數: debugInfo.storage.length,
+    });
+  }, [debugCart, items]);
+
+  // 手動刷新購物車
+  const handleRefreshCart = () => {
+    setIsLoading(true);
+    toast.info("正在刷新購物車...");
+
+    // 強制同步購物車
+    syncCart();
+
+    // 給同步一些時間完成
+    setTimeout(() => {
+      setIsLoading(false);
+      toast.success(`購物車已刷新, ${items.length} 件商品`);
+    }, 500);
+  };
 
   // 處理結帳
   const handleCheckout = () => {
+    // 先同步購物車，確保數據最新
+    syncCart();
+
     if (items.length === 0) {
       toast.error("購物車為空，無法結帳");
       return;
@@ -21,12 +85,19 @@ const Cart = () => {
 
     setProcessingOrder(true);
 
-    // 模擬結帳處理
+    // 確保購物車數據同步後再處理結帳
     setTimeout(() => {
-      toast.success("��單已成功提交！感謝您的購買。");
-      clearCart();
+      // 再次檢查購物車
+      if (items.length === 0) {
+        toast.error("結帳時發現購物車為空");
+        setProcessingOrder(false);
+        return;
+      }
+
+      // 導航到結帳頁面
+      navigate("/checkout");
       setProcessingOrder(false);
-    }, 1500);
+    }, 300);
   };
 
   // 格式化價格
@@ -39,12 +110,43 @@ const Cart = () => {
     }).format(price);
   };
 
-  // 購物車為空的顯示
-  if (items.length === 0) {
+  // 加載中顯示
+  if (isLoading) {
     return (
       <Layout>
         <div className="container mx-auto px-4 py-16">
           <h1 className="text-3xl font-bold text-center mb-8">購物車</h1>
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+            <span className="ml-3 text-lg">正在載入購物車...</span>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  // 購物車為空的顯示
+  if (items.length === 0) {
+    const storedCart = getStoredCart();
+    const hasStoredItems = storedCart && storedCart.length > 0;
+
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-16">
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl font-bold">購物車</h1>
+            {hasStoredItems && (
+              <Button
+                variant="outline"
+                onClick={handleRefreshCart}
+                className="flex items-center gap-2"
+              >
+                <RefreshCw className="h-4 w-4" />
+                刷新購物車
+              </Button>
+            )}
+          </div>
+
           <div className="bg-white rounded-lg shadow-sm p-8 text-center max-w-lg mx-auto">
             <div className="flex justify-center mb-4">
               <ShoppingBag className="h-16 w-16 text-gray-300" />
@@ -55,9 +157,17 @@ const Cart = () => {
               <br />
               探索我們的產品，找到您喜愛的珠寶飾品吧！
             </p>
-            <Button asChild size="lg">
-              <Link to="/products/necklaces">繼續購物</Link>
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg">
+                <Link to="/products/necklaces">繼續購物</Link>
+              </Button>
+
+              {hasStoredItems && (
+                <Button variant="outline" onClick={handleRefreshCart} size="lg">
+                  恢復購物車
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </Layout>
@@ -67,7 +177,17 @@ const Cart = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold mb-12">購物車</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">購物車</h1>
+          <Button
+            variant="outline"
+            onClick={handleRefreshCart}
+            className="flex items-center gap-2"
+          >
+            <RefreshCw className="h-4 w-4" />
+            刷新購物車
+          </Button>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {/* 購物車商品列表 */}
