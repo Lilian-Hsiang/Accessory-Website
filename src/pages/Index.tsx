@@ -110,7 +110,7 @@ const Index = () => {
                 </div>
               </div>
               <h3 className="font-serif text-xl text-[#C0A062] mt-4 mb-1">
-                Earrings
+                Necklaces
               </h3>
               <p className="text-sm text-gray-600 mb-3">精緻設計的項鍊系列</p>
               <Link

@@ -23,6 +23,27 @@ import earrings1_3 from "@/assets/homePage/bestSellers/bs_earrings1-3.png";
 import earrings2_1 from "@/assets/homePage/bestSellers/bs_earrings2-1.png";
 import earrings2_2 from "@/assets/homePage/bestSellers/bs_earrings2-2.png";
 import earrings2_3 from "@/assets/homePage/bestSellers/bs_earrings2-3.png";
+import earrings3_1 from "@/assets/earrings/earrings3_1.png";
+import earrings3_2 from "@/assets/earrings/earrings3_2.png";
+import earrings3_3 from "@/assets/earrings/earrings3_3.png";
+import earrings4_1 from "@/assets/earrings/earrings4_1.png";
+import earrings4_2 from "@/assets/earrings/earrings4_2.png";
+import earrings4_3 from "@/assets/earrings/earrings4_3.png";
+import earrings5_1 from "@/assets/earrings/earrings5_1.png";
+import earrings5_2 from "@/assets/earrings/earrings5_2.png";
+import earrings5_3 from "@/assets/earrings/earrings5_3.png";
+import earrings6_1 from "@/assets/earrings/earrings6_1.png";
+import earrings6_2 from "@/assets/earrings/earrings6_2.png";
+import earrings6_3 from "@/assets/earrings/earrings6_3.png";
+import earrings7_1 from "@/assets/earrings/earrings7_1.png";
+import earrings7_2 from "@/assets/earrings/earrings7_2.png";
+import earrings7_3 from "@/assets/earrings/earrings7_3.png";
+import earrings8_1 from "@/assets/earrings/earrings8_1.png";
+import earrings8_2 from "@/assets/earrings/earrings8_2.png";
+import earrings8_3 from "@/assets/earrings/earrings8_3.png";
+import earrings9_1 from "@/assets/earrings/earrings9_1.png";
+import earrings9_2 from "@/assets/earrings/earrings9_2.png";
+import earrings9_3 from "@/assets/earrings/earrings9_3.png";
 
 // 用於生成隨機ID的輔助函數
 const generateId = (): string => {
@@ -50,7 +71,7 @@ const createProducts = (): Product[] => {
       const id = generateId();
       const isFeatured = i < 2; // 前兩個是精選產品
 
-            // 根據類別和索引自訂圖片
+      // 根據類別和索引自訂圖片
       let images: string[] = [];
       if (category === "項鍊" && i === 0) {
         images = [necklace1_1, necklace1_2, necklace1_3];
@@ -68,6 +89,20 @@ const createProducts = (): Product[] => {
         images = [earrings1_1, earrings1_2, earrings1_3];
       } else if (category === "耳環" && i === 1) {
         images = [earrings2_1, earrings2_2, earrings2_3];
+      } else if (category === "耳環" && i === 2) {
+        images = [earrings3_1, earrings3_2, earrings3_3];
+      } else if (category === "耳環" && i === 3) {
+        images = [earrings4_1, earrings4_2, earrings4_3];
+      } else if (category === "耳環" && i === 4) {
+        images = [earrings5_1, earrings5_2, earrings5_3];
+      } else if (category === "耳環" && i === 5) {
+        images = [earrings6_1, earrings6_2, earrings6_3];
+      } else if (category === "耳環" && i === 6) {
+        images = [earrings7_1, earrings7_2, earrings7_3];
+      } else if (category === "耳環" && i === 7) {
+        images = [earrings8_1, earrings8_2, earrings8_3];
+      } else if (category === "耳環" && i === 8) {
+        images = [earrings9_1, earrings9_2, earrings9_3];
       } 
       else {
         images = [
