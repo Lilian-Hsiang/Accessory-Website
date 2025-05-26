@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, ShoppingCart, X } from "lucide-react";
+import { Menu, ShoppingCart, X, Search, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -22,9 +22,7 @@ const NavLink = ({ to, label, isActive, onClick }: NavLinkProps) => (
   <Link
     to={to}
     className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-      isActive
-        ? "bg-primary/10 text-primary"
-        : "text-gray-600 hover:text-primary hover:bg-primary/5"
+      isActive ? "text-[#C0A062]" : "text-gray-600 hover:text-[#C0A062]"
     }`}
     onClick={onClick}
   >
@@ -67,12 +65,10 @@ const Navbar = () => {
           <Button
             variant="ghost"
             className={`px-3 py-2 text-sm font-medium rounded-md ${
-              isActive("/products")
-                ? "bg-primary/10 text-primary"
-                : "text-gray-600"
+              isActive("/products") ? "text-[#C0A062]" : "text-gray-600"
             }`}
           >
-            產品分類
+            <span>產品分類</span>
             <span className="ml-1">{isProductsOpen ? "▲" : "▼"}</span>
           </Button>
         </CollapsibleTrigger>
@@ -125,7 +121,7 @@ const Navbar = () => {
       />
 
       <Collapsible className="w-full">
-        <CollapsibleTrigger className="flex w-full px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:text-primary hover:bg-primary/5 justify-between items-center">
+        <CollapsibleTrigger className="flex w-full px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:text-[#C0A062] justify-between items-center">
           <span>產品分類</span>
           <span>▼</span>
         </CollapsibleTrigger>
@@ -168,7 +164,9 @@ const Navbar = () => {
           {/* Logo區域 */}
           <div className="flex">
             <Link to="/" className="flex items-center">
-              <span className="font-bold text-xl text-primary">優雅飾品</span>
+              <span className="font-serif text-xl text-[#C0A062]">
+                優雅飾品
+              </span>
             </Link>
           </div>
 
@@ -177,10 +175,21 @@ const Navbar = () => {
 
           {/* 購物車和移動端菜單按鈕 */}
           <div className="flex items-center space-x-2">
+            {/* 搜索按鈕 */}
+            <Button variant="ghost" size="icon" className="text-gray-600">
+              <Search className="h-5 w-5" />
+            </Button>
+
+            {/* 用戶按鈕 */}
+            <Button variant="ghost" size="icon" className="text-gray-600">
+              <User className="h-5 w-5" />
+            </Button>
+
+            {/* 購物車按鈕 */}
             <Link to="/cart" className="relative p-2">
-              <ShoppingCart className="h-5 w-5" />
+              <ShoppingCart className="h-5 w-5 text-gray-600" />
               {getTotalItems() > 0 && (
-                <span className="absolute top-0 right-0 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                <span className="absolute top-0 right-0 bg-[#C0A062] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                   {getTotalItems()}
                 </span>
               )}
@@ -196,7 +205,7 @@ const Navbar = () => {
               <SheetContent side="right" className="w-4/5 sm:w-80">
                 <div className="flex flex-col h-full">
                   <div className="flex items-center justify-between pb-4 border-b">
-                    <span className="font-bold text-xl text-primary">
+                    <span className="font-serif text-xl text-[#C0A062]">
                       優雅飾品
                     </span>
                     <Button

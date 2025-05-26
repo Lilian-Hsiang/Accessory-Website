@@ -4,87 +4,200 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/products/ProductCard";
 import { getFeaturedProducts } from "@/data/products";
-import { useInitCartSync } from "@/hooks/useInitCartSync";
+import { getCategoryPath } from "@/types/product";
 
 const Index = () => {
   const featuredProducts = getFeaturedProducts();
 
-  // 確保購物車同步
-  useInitCartSync();
-
   return (
     <Layout>
-      {/* 英雄區域 */}
-      <section className="relative bg-gradient-to-r from-violet-50 to-purple-100 overflow-hidden">
-        <div className="container mx-auto px-4 py-16 md:py-24">
+      {/* 英雄區域 - 高雅風格 */}
+      <section className="relative bg-[#FBF9F2] overflow-hidden py-16 md:py-24">
+        <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                優雅飾品，襯托您的獨特魅力
+            <div className="text-center md:text-left">
+              <h1 className="text-4xl md:text-5xl font-serif text-[#C0A062] mb-4">
+                Timeless Elegance
               </h1>
               <p className="text-lg text-gray-700 mb-8">
                 每一件飾品都是藝術品，精心打造以展現您的個人風格。無論是日常佩戴還是特殊場合，我們的珠寶都能讓您脫穎而出。
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Button asChild size="lg">
-                  <Link to="/products/necklaces">探索項鍊系列</Link>
+              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                <Button
+                  asChild
+                  className="bg-[#C0A062] hover:bg-[#A8894F] text-white rounded-full px-8"
+                >
+                  <Link to="/products/necklaces">探索精選系列</Link>
                 </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link to="/about">了解更多</Link>
-                </Button>
+              </div>
+
+              {/* 高雅指標數據 */}
+              <div className="mt-10 grid grid-cols-3 gap-4">
+                <div className="text-center">
+                  <p className="text-[#C0A062] font-serif text-2xl mb-1">98%</p>
+                  <p className="text-xs text-gray-600">顧客滿意度</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-[#C0A062] font-serif text-2xl mb-1">
+                    100%
+                  </p>
+                  <p className="text-xs text-gray-600">優質材料</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-[#C0A062] font-serif text-2xl mb-1">
+                    500+
+                  </p>
+                  <p className="text-xs text-gray-600">獨特設計</p>
+                </div>
               </div>
             </div>
             <div className="relative">
-              <img
-                src="https://via.placeholder.com/600x400/F3F4F6/000000?text=優雅飾品"
-                alt="精美珠寶展示"
-                className="rounded-lg shadow-xl"
-              />
+              <div className="rounded-full bg-[#F5F0E4] p-6 mx-auto max-w-md aspect-square flex items-center justify-center overflow-hidden">
+                <img
+                  src="https://via.placeholder.com/500x500/F3F4F6/000000?text=優雅飾品"
+                  alt="精美珠寶展示"
+                  className="rounded-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-[#F9F5EA] rounded-full flex items-center justify-center z-10">
+                <div className="text-center">
+                  <p className="text-[#C0A062] font-serif text-lg">全新系列</p>
+                  <p className="text-xs text-gray-600">立即探索</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 裝飾元素 */}
+        <div className="absolute top-1/4 right-10 w-20 h-20 text-[#C0A062] opacity-20">
+          <svg viewBox="0 0 100 100" fill="currentColor">
+            <path d="M50 0 L100 50 L50 100 L0 50 Z" />
+          </svg>
+        </div>
+        <div className="absolute bottom-1/4 left-10 w-16 h-16 text-[#C0A062] opacity-20">
+          <svg viewBox="0 0 100 100" fill="currentColor">
+            <circle cx="50" cy="50" r="50" />
+          </svg>
+        </div>
+      </section>
+
+      {/* 分類導航 - 拱門風格 */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-serif text-center text-[#C0A062] mb-6">
+            Shop by Category
+          </h2>
+          <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+            探索我們精心打造的珠寶系列，每一件作品都融合了精湛工藝和獨特設計
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {/* 項鍊分類 - 拱門樣式 */}
+            <div className="text-center">
+              <div className="arch-container mx-auto">
+                <div className="arch-shape">
+                  <img
+                    src="https://via.placeholder.com/300x300/E5E7EB/000000?text=項鍊"
+                    alt="項鍊"
+                    className="arch-image"
+                  />
+                </div>
+              </div>
+              <h3 className="font-serif text-xl text-[#C0A062] mt-4 mb-1">
+                Earrings
+              </h3>
+              <p className="text-sm text-gray-600 mb-3">精緻設計的耳環系列</p>
+              <Link
+                to="/products/necklaces"
+                className="text-xs text-[#C0A062] border-b border-[#C0A062] pb-1 hover:text-[#A8894F]"
+              >
+                Explore Shop
+              </Link>
+            </div>
+
+            {/* 手鍊分類 - 拱門樣式 */}
+            <div className="text-center">
+              <div className="arch-container mx-auto">
+                <div className="arch-shape">
+                  <img
+                    src="https://via.placeholder.com/300x300/E5E7EB/000000?text=手鍊"
+                    alt="手鍊"
+                    className="arch-image"
+                  />
+                </div>
+              </div>
+              <h3 className="font-serif text-xl text-[#C0A062] mt-4 mb-1">
+                Necklaces
+              </h3>
+              <p className="text-sm text-gray-600 mb-3">優雅迷人的項鍊系列</p>
+              <Link
+                to="/products/bracelets"
+                className="text-xs text-[#C0A062] border-b border-[#C0A062] pb-1 hover:text-[#A8894F]"
+              >
+                Explore Shop
+              </Link>
+            </div>
+
+            {/* 戒指分類 - 拱門樣式 */}
+            <div className="text-center">
+              <div className="arch-container mx-auto">
+                <div className="arch-shape">
+                  <img
+                    src="https://via.placeholder.com/300x300/E5E7EB/000000?text=戒指"
+                    alt="戒指"
+                    className="arch-image"
+                  />
+                </div>
+              </div>
+              <h3 className="font-serif text-xl text-[#C0A062] mt-4 mb-1">
+                Rings
+              </h3>
+              <p className="text-sm text-gray-600 mb-3">永恆的戒指系列</p>
+              <Link
+                to="/products/rings"
+                className="text-xs text-[#C0A062] border-b border-[#C0A062] pb-1 hover:text-[#A8894F]"
+              >
+                Explore Shop
+              </Link>
+            </div>
+
+            {/* 耳環分類 - 拱門樣式 */}
+            <div className="text-center">
+              <div className="arch-container mx-auto">
+                <div className="arch-shape">
+                  <img
+                    src="https://via.placeholder.com/300x300/E5E7EB/000000?text=耳環"
+                    alt="耳環"
+                    className="arch-image"
+                  />
+                </div>
+              </div>
+              <h3 className="font-serif text-xl text-[#C0A062] mt-4 mb-1">
+                Bracelets
+              </h3>
+              <p className="text-sm text-gray-600 mb-3">精美手工製作的手鍊</p>
+              <Link
+                to="/products/earrings"
+                className="text-xs text-[#C0A062] border-b border-[#C0A062] pb-1 hover:text-[#A8894F]"
+              >
+                Explore Shop
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 分類導航 */}
-      <section className="py-16 bg-white">
+      {/* 精選產品 - 金色風格 */}
+      <section className="py-16 bg-[#FBF9F2]">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">精選分類</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <CategoryCard
-              title="項鍊"
-              image="https://via.placeholder.com/300x300/E5E7EB/000000?text=項鍊"
-              link="/products/necklaces"
-            />
-            <CategoryCard
-              title="手鍊"
-              image="https://via.placeholder.com/300x300/E5E7EB/000000?text=手鍊"
-              link="/products/bracelets"
-            />
-            <CategoryCard
-              title="戒指"
-              image="https://via.placeholder.com/300x300/E5E7EB/000000?text=戒指"
-              link="/products/rings"
-            />
-            <CategoryCard
-              title="耳環"
-              image="https://via.placeholder.com/300x300/E5E7EB/000000?text=耳環"
-              link="/products/earrings"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* 精選產品 */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold">精選產品</h2>
-            <Link
-              to="/products/necklaces"
-              className="text-primary hover:underline font-medium"
-            >
-              查看全部 →
-            </Link>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-serif text-[#C0A062] mb-4">
+              Best Sellers
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              探索我們最受歡迎的珠寶系列，這些作品以其卓越的品質和獨特的設計深受顧客喜愛
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -92,109 +205,144 @@ const Index = () => {
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
+
+          <div className="text-center mt-10">
+            <Button
+              asChild
+              variant="outline"
+              className="border-[#C0A062] text-[#C0A062] hover:bg-[#C0A062] hover:text-white rounded-full px-8"
+            >
+              <Link to="/products/necklaces">瀏覽全部商品</Link>
+            </Button>
+          </div>
         </div>
       </section>
 
-      {/* 關於我們簡介 */}
+      {/* 新品上市 */}
       <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-serif text-[#C0A062] mb-4">
+              New Arrivals
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              探索我們最新推出的珠寶系列，融合當代設計與傳統工藝的精美作品
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {featuredProducts.slice(0, 6).map((product, index) => (
+              <div
+                key={`new-${product.id}`}
+                className="group relative overflow-hidden rounded-lg"
+              >
+                <img
+                  src={product.images[0]}
+                  alt={product.name}
+                  className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                  <div className="text-white">
+                    <h3 className="font-serif text-lg">{product.name}</h3>
+                    <p className="text-sm opacity-80">
+                      {new Intl.NumberFormat("zh-TW", {
+                        style: "currency",
+                        currency: "TWD",
+                        minimumFractionDigits: 0,
+                      }).format(product.price)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Button
+              asChild
+              variant="outline"
+              className="border-[#C0A062] text-[#C0A062] hover:bg-[#C0A062] hover:text-white rounded-full px-8"
+            >
+              <Link to="/products/necklaces">查看更多新品</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* 品牌故事 */}
+      <section className="py-16 bg-[#FBF9F2]">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
+              <h2 className="text-3xl font-serif text-[#C0A062] mb-6">
+                Designs Beyond Imagination
+              </h2>
+              <p className="text-gray-700 mb-6">
+                在優雅飾品，我們相信每一件珠寶都應該訴說一個故事，體現佩戴者的獨特個性。我們的設計師團隊從自然、藝術和文化中汲取靈感，創造出既經典又現代的作品。
+              </p>
+              <ul className="space-y-4">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-[#C0A062] rounded-full mr-3"></span>
+                  <span>精湛工藝：每件作品均經過精心打造</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-[#C0A062] rounded-full mr-3"></span>
+                  <span>創新設計：融合傳統與現代的獨特理念</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-[#C0A062] rounded-full mr-3"></span>
+                  <span>限量系列：獨一無二的珍貴作品</span>
+                </li>
+              </ul>
+              <Button
+                asChild
+                variant="link"
+                className="text-[#C0A062] hover:text-[#A8894F] p-0 mt-6"
+              >
+                <Link to="/about">探索非凡設計 →</Link>
+              </Button>
+            </div>
+            <div className="relative">
               <img
                 src="https://via.placeholder.com/600x400/F3F4F6/000000?text=品牌故事"
                 alt="品牌故事"
                 className="rounded-lg"
               />
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold mb-6">關於優雅飾品</h2>
-              <p className="text-gray-700 mb-4">
-                優雅飾品創立於2010年，我們的使命是為每位顧客提供精緻、獨特且價格合理的珠寶飾品。
-              </p>
-              <p className="text-gray-700 mb-6">
-                每一件作品都由專業設計師設計，並由技術精湛的工匠手工製作，使用高品質的材料，確保每件飾品都能經得起時間的考驗。
-              </p>
-              <Button asChild variant="outline">
-                <Link to="/about">了解更多我們的故事</Link>
-              </Button>
+              <div className="absolute -bottom-4 -left-4 w-40 h-40 border-8 border-white rounded-full overflow-hidden">
+                <img
+                  src="https://via.placeholder.com/200x200/E5E7EB/000000?text=細節"
+                  alt="珠寶細節"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 客戶評價 */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">顧客評價</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <TestimonialCard
-              name="王小姐"
-              text="買了優雅飾品的銀手鍊作為送給母親的禮物，她非常喜歡！質感很棒，包裝也很精美。"
-              rating={5}
+      {/* 訂閱區域 */}
+      <section className="py-16 bg-[#2D2C2A] text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-serif text-[#C0A062] mb-4">
+            NEVER MISS A MOMENT OF LUXURY
+          </h2>
+          <p className="text-gray-300 mb-8 max-w-xl mx-auto">
+            訂閱我們的電子報，搶先了解最新產品、獨家優惠和珠寶保養小貼士
+          </p>
+          <div className="flex max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="請輸入您的Email"
+              className="flex-grow bg-[#3D3C3A] border-none text-white px-4 py-3 rounded-l-full focus:outline-none"
             />
-            <TestimonialCard
-              name="李先生"
-              text="在這裡買了訂婚戒指，服務很周到，設計獨特，女友收到非常驚喜。"
-              rating={5}
-            />
-            <TestimonialCard
-              name="張小姐"
-              text="項鍊的質量很好，戴了很久都沒有變色。設計很時尚，收到了很多朋友的讚美。"
-              rating={4}
-            />
+            <Button className="bg-[#C0A062] hover:bg-[#A8894F] text-white rounded-r-full">
+              訂閱
+            </Button>
           </div>
         </div>
       </section>
     </Layout>
   );
 };
-
-// 分類卡片元件
-interface CategoryCardProps {
-  title: string;
-  image: string;
-  link: string;
-}
-
-const CategoryCard = ({ title, image, link }: CategoryCardProps) => (
-  <Link to={link} className="group block">
-    <div className="relative rounded-lg overflow-hidden">
-      <img
-        src={image}
-        alt={title}
-        className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-105"
-      />
-      <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center transition-opacity group-hover:bg-opacity-40">
-        <span className="text-white text-xl font-bold">{title}</span>
-      </div>
-    </div>
-  </Link>
-);
-
-// 客戶評價卡片元件
-interface TestimonialCardProps {
-  name: string;
-  text: string;
-  rating: number;
-}
-
-const TestimonialCard = ({ name, text, rating }: TestimonialCardProps) => (
-  <div className="bg-white p-6 rounded-lg shadow-sm">
-    <div className="flex text-yellow-400 mb-3">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg
-          key={i}
-          className={`w-5 h-5 ${i < rating ? "fill-current" : "text-gray-300"}`}
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
-      ))}
-    </div>
-    <p className="text-gray-600 mb-4">{text}</p>
-    <p className="font-semibold">{name}</p>
-  </div>
-);
 
 export default Index;
