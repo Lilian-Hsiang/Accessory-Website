@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // 添加 useNavigate 導入
 import Layout from "@/components/layout/Layout";
 import CartItem from "@/components/cart/CartItem";
 import { useCart } from "@/contexts/CartContext";
@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { getStoredCart } from "@/lib/cartStorage";
 
 const Cart = () => {
+  const navigate = useNavigate(); // 使用 useNavigate hook
   const {
     items,
     updateQuantity,
@@ -46,7 +47,7 @@ const Cart = () => {
     }, 300);
 
     return () => clearTimeout(timer);
-  }, [syncCart]);
+  }, [syncCart, items.length]);
 
   // 檢查購物車數據一致性
   useEffect(() => {
