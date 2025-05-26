@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ShoppingCart, Heart } from "lucide-react";
 import { toast } from "sonner";
 
+
 interface ProductCardProps {
   product: Product;
 }

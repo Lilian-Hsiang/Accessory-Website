@@ -5,6 +5,11 @@ import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/products/ProductCard";
 import { getFeaturedProducts } from "@/data/products";
 import { getCategoryPath } from "@/types/product";
+import acc1 from '../assets/homePage/acc1.jpg';
+import necklace1 from '../assets/homePage/necklace1.jpg';
+import earrings1 from '../assets/homePage/earrings1.jpg';
+import ring1 from '../assets/homePage/ring1.jpg';
+import bracelet1 from '../assets/homePage/bracelet1.jpg';
 
 const Index = () => {
   const featuredProducts = getFeaturedProducts();
@@ -54,9 +59,9 @@ const Index = () => {
             <div className="relative">
               <div className="rounded-full bg-[#F5F0E4] p-6 mx-auto max-w-md aspect-square flex items-center justify-center overflow-hidden">
                 <img
-                  src="https://via.placeholder.com/500x500/F3F4F6/000000?text=優雅飾品"
+                  src={acc1}
                   alt="精美珠寶展示"
-                  className="rounded-full object-cover"
+                  className="rounded-full object-cover w-full h-full"
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-[#F9F5EA] rounded-full flex items-center justify-center z-10">
@@ -98,7 +103,7 @@ const Index = () => {
               <div className="arch-container mx-auto">
                 <div className="arch-shape">
                   <img
-                    src="https://via.placeholder.com/300x300/E5E7EB/000000?text=項鍊"
+                    src={necklace1}
                     alt="項鍊"
                     className="arch-image"
                   />
@@ -107,7 +112,7 @@ const Index = () => {
               <h3 className="font-serif text-xl text-[#C0A062] mt-4 mb-1">
                 Earrings
               </h3>
-              <p className="text-sm text-gray-600 mb-3">精緻設計的耳環系列</p>
+              <p className="text-sm text-gray-600 mb-3">精緻設計的項鍊系列</p>
               <Link
                 to="/products/necklaces"
                 className="text-xs text-[#C0A062] border-b border-[#C0A062] pb-1 hover:text-[#A8894F]"
@@ -121,16 +126,16 @@ const Index = () => {
               <div className="arch-container mx-auto">
                 <div className="arch-shape">
                   <img
-                    src="https://via.placeholder.com/300x300/E5E7EB/000000?text=手鍊"
+                    src={bracelet1}
                     alt="手鍊"
                     className="arch-image"
                   />
                 </div>
               </div>
               <h3 className="font-serif text-xl text-[#C0A062] mt-4 mb-1">
-                Necklaces
+                Bracelets
               </h3>
-              <p className="text-sm text-gray-600 mb-3">優雅迷人的項鍊系列</p>
+              <p className="text-sm text-gray-600 mb-3">優雅迷人的手鍊系列</p>
               <Link
                 to="/products/bracelets"
                 className="text-xs text-[#C0A062] border-b border-[#C0A062] pb-1 hover:text-[#A8894F]"
@@ -144,7 +149,7 @@ const Index = () => {
               <div className="arch-container mx-auto">
                 <div className="arch-shape">
                   <img
-                    src="https://via.placeholder.com/300x300/E5E7EB/000000?text=戒指"
+                    src={ring1}                   
                     alt="戒指"
                     className="arch-image"
                   />
@@ -167,16 +172,16 @@ const Index = () => {
               <div className="arch-container mx-auto">
                 <div className="arch-shape">
                   <img
-                    src="https://via.placeholder.com/300x300/E5E7EB/000000?text=耳環"
+                    src={earrings1}
                     alt="耳環"
                     className="arch-image"
                   />
                 </div>
               </div>
               <h3 className="font-serif text-xl text-[#C0A062] mt-4 mb-1">
-                Bracelets
+                Earrings
               </h3>
-              <p className="text-sm text-gray-600 mb-3">精美手工製作的手鍊</p>
+              <p className="text-sm text-gray-600 mb-3">精美手工製作的耳環</p>
               <Link
                 to="/products/earrings"
                 className="text-xs text-[#C0A062] border-b border-[#C0A062] pb-1 hover:text-[#A8894F]"
