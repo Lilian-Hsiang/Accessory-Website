@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import { getProductById } from "@/data/products";
-import { Product } from "@/types/product";
+import {
+  getProductById,
+  getProductsByCategory as getProductsByCat,
+} from "@/data/products";
+import { Product, ProductCategory, getCategoryPath } from "@/types/product";
 import { useCart } from "@/contexts/CartContext";
 import { useInitCartSync } from "@/hooks/useInitCartSync";
 import { Button } from "@/components/ui/button";
@@ -136,6 +139,13 @@ const ProductDetail = () => {
       </Layout>
     );
   }
+
+  // 取得相關產品
+  const relatedProducts = product.category
+    ? getProductsByCat(product.category)
+        .filter((p) => p.id !== product.id)
+        .slice(0, 4)
+    : [];
 
   // 渲染產品詳情
   return (
@@ -299,7 +309,7 @@ const ProductDetail = () => {
                   <li>避免接觸化學物質，如香水、洗髮精等</li>
                   <li>不佩戴時，請妥善收納於首飾盒中</li>
                   <li>避免長時間暴露在陽光下或潮濕環境中</li>
-                  <li>定期使用專業飾品清潔布輕擦，保持���澤</li>
+                  <li>定期使用專業飾品清潔布輕擦，保持光澤</li>
                 </ul>
               </div>
             </div>
@@ -313,61 +323,37 @@ const ProductDetail = () => {
               相關商品
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {product.category &&
-                getProductById(id) &&
-                getProductsByCategory(product.category)
-                  .filter((p) => p.id !== product.id)
-                  .slice(0, 4)
-                  .map((relatedProduct) => (
-                    <div
-                      key={relatedProduct.id}
-                      className="cursor-pointer group"
-                      onClick={() =>
-                        navigate(
-                          `/products/${getCategoryPath(relatedProduct.category)}/${relatedProduct.id}`,
-                        )
-                      }
-                    >
-                      <div className="aspect-square overflow-hidden rounded-lg bg-[#F9F7F2]">
-                        <img
-                          src={relatedProduct.images[0]}
-                          alt={relatedProduct.name}
-                          className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                        />
-                      </div>
-                      <h3 className="mt-3 text-sm font-medium">
-                        {relatedProduct.name}
-                      </h3>
-                      <p className="text-[#C0A062] font-serif">
-                        {formatPrice(relatedProduct.price)}
-                      </p>
-                    </div>
-                  ))}
+              {relatedProducts.map((relatedProduct) => (
+                <div
+                  key={relatedProduct.id}
+                  className="cursor-pointer group"
+                  onClick={() =>
+                    navigate(
+                      `/products/${getCategoryPath(relatedProduct.category)}/${relatedProduct.id}`,
+                    )
+                  }
+                >
+                  <div className="aspect-square overflow-hidden rounded-lg bg-[#F9F7F2]">
+                    <img
+                      src={relatedProduct.images[0]}
+                      alt={relatedProduct.name}
+                      className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    />
+                  </div>
+                  <h3 className="mt-3 text-sm font-medium">
+                    {relatedProduct.name}
+                  </h3>
+                  <p className="text-[#C0A062] font-serif">
+                    {formatPrice(relatedProduct.price)}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
     </Layout>
   );
-};
-
-// 輔助函數從分類獲取路徑
-const getCategoryPath = (category: string): string => {
-  const pathMap: Record<string, string> = {
-    項鍊: "necklaces",
-    手鍊: "bracelets",
-    戒指: "rings",
-    耳環: "earrings",
-  };
-
-  return pathMap[category] || "other";
-};
-
-// 獲取特定分類的產品
-const getProductsByCategory = (category: string): Product[] => {
-  // 導入自 data/products 的函數
-  const { getProductsByCategory: getProducts } = require("@/data/products");
-  return getProducts(category as ProductCategory);
 };
 
 export default ProductDetail;
