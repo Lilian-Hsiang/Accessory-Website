@@ -137,7 +137,7 @@ const Index = () => {
               <h3 className="font-serif text-xl text-[#C0A062] mt-4 mb-1">
                 Bracelets
               </h3>
-              <p className="text-sm text-gray-600 mb-3">優雅迷人的手鍊系列</p>
+              <p className="text-sm text-gray-600 mb-3">典雅迷人的手鍊系列</p>
               <Link
                 to="/products/bracelets"
                 className="text-xs text-[#C0A062] border-b border-[#C0A062] pb-1 hover:text-[#A8894F]"
@@ -285,7 +285,7 @@ const Index = () => {
                 Designs Beyond Imagination
               </h2>
               <p className="text-gray-700 mb-6">
-                在優雅飾品，我們相信每一件珠寶都應該訴說一個故事，體現佩戴者的獨特個性。我們的設計師團隊從自然、藝術和文化中汲取靈感，創造出既經典又現代的作品。
+                在典雅飾品，我們相信每一件珠寶都應該訴說一個故事，體現佩戴者的獨特個性。我們的設計師團隊從自然、藝術和文化中汲取靈感，創造出既經典又現代的作品。
               </p>
               <ul className="space-y-4">
                 <li className="flex items-center">

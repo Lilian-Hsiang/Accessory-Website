@@ -39,6 +39,7 @@ const Navbar = () => {
   const { getFavoritesCount } = useFavorites();
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [mobileSheetOpen, setMobileSheetOpen] = useState(false);
+   const [isHelpOpen, setIsHelpOpen] = useState(false);
 
   // 檢查當前路徑是否活躍
   const isActive = (path: string) => {
@@ -100,6 +101,53 @@ const Navbar = () => {
               label="耳環"
               isActive={isActive("/products/earrings")}
               onClick={() => setIsProductsOpen(false)}
+            />
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
+
+       {/* 幫助中心下拉選單 */}
+      <Collapsible
+        open={isHelpOpen}
+        onOpenChange={setIsHelpOpen}
+        className="relative"
+      >
+        <CollapsibleTrigger asChild>
+          <Button
+            variant="ghost"
+            className={`px-3 py-2 text-sm font-medium rounded-md ${
+              isActive("/help") ? "text-[#C0A062]" : "text-gray-600"
+            }`}
+          >
+            幫助中心
+            <span className="ml-1">{isHelpOpen ? "▲" : "▼"}</span>
+          </Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="absolute bg-white shadow-md rounded-md mt-1 py-2 w-40 z-10">
+          <div className="flex flex-col">
+            <NavLink
+              to="/help/buying-guide"
+              label="購買指南"
+              isActive={isActive("/help/buying-guide")}
+              onClick={() => setIsHelpOpen(false)}
+            />
+            <NavLink
+              to="/help/return-policy"
+              label="退換貨政策"
+              isActive={isActive("/help/return-policy")}
+              onClick={() => setIsHelpOpen(false)}
+            />
+            <NavLink
+              to="/help/payment-methods"
+              label="付款方式"
+              isActive={isActive("/help/payment-methods")}
+              onClick={() => setIsHelpOpen(false)}
+            />
+            <NavLink
+              to="/help/faq"
+              label="常見問題"
+              isActive={isActive("/help/faq")}
+              onClick={() => setIsHelpOpen(false)}
             />
           </div>
         </CollapsibleContent>
@@ -168,7 +216,7 @@ const Navbar = () => {
           <div className="flex">
             <Link to="/" className="flex items-center">
               <span className="font-serif text-xl text-[#C0A062]">
-                優雅飾品
+                典雅飾品
               </span>
             </Link>
           </div>
@@ -233,7 +281,7 @@ const Navbar = () => {
                 <div className="flex flex-col h-full">
                   <div className="flex items-center justify-between pb-4 border-b">
                     <span className="font-serif text-xl text-[#C0A062]">
-                      優雅飾品
+                      典雅飾品
                     </span>
                     <Button
                       variant="ghost"

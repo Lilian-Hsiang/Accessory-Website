@@ -45,7 +45,7 @@ export const sampleProducts: Product[] = [
     id: "4",
     name: "水晶耳環",
     price: 1580,
-    description: "閃亮水晶材質，優雅垂墜設計",
+    description: "閃亮水晶材質，典雅垂墜設計",
     category: "耳環",
     images: [
       "https://via.placeholder.com/400x400/f3f4f6/9ca3af?text=水晶耳環",

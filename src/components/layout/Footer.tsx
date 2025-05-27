@@ -9,7 +9,7 @@ const Footer = () => {
         {/* 頁尾上部 */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-serif text-[#C0A062] text-xl mb-4">優雅飾品</h3>
+            <h3 className="font-serif text-[#C0A062] text-xl mb-4">典雅飾品</h3>
             <p className="text-sm opacity-80 mb-6">
               專注於提供高品質、精美的珠寶飾品，滿足您對美的追求。
             </p>
@@ -77,36 +77,24 @@ const Footer = () => {
             <h3 className="font-serif text-[#C0A062] text-lg mb-4">幫助中心</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a
-                  href="#"
-                  className="opacity-80 hover:opacity-100 hover:text-[#C0A062] transition-colors"
-                >
+                <Link to="/help/buying-guide" className="opacity-80 hover:opacity-100 hover:text-[#C0A062] transition-colors">
                   購買指南
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="opacity-80 hover:opacity-100 hover:text-[#C0A062] transition-colors"
-                >
+                <Link to="/help/return-policy" className="opacity-80 hover:opacity-100 hover:text-[#C0A062] transition-colors">
                   退換貨政策
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="opacity-80 hover:opacity-100 hover:text-[#C0A062] transition-colors"
-                >
+                <Link to="/help/payment-methods" className="opacity-80 hover:opacity-100 hover:text-[#C0A062] transition-colors">
                   付款方式
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="opacity-80 hover:opacity-100 hover:text-[#C0A062] transition-colors"
-                >
+                <Link to="/help/faq" className="opacity-80 hover:opacity-100 hover:text-[#C0A062] transition-colors">
                   常見問題
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -146,7 +134,7 @@ const Footer = () => {
         {/* 頁尾下部 */}
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
           <div className="mb-4 md:mb-0">
-            <p>&copy; {new Date().getFullYear()} 優雅飾品 - 版權所有</p>
+            <p>&copy; {new Date().getFullYear()} 典雅飾品 - 版權所有</p>
           </div>
           <div className="flex space-x-6">
             <a href="#" className="hover:text-[#C0A062]">

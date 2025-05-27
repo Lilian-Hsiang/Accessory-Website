@@ -9,7 +9,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold text-center">關於我們</h1>
           <p className="text-center text-gray-600 mt-4 max-w-2xl mx-auto">
-            優雅飾品成立於2010年，致力於為每位顧客提供高品質、風格獨特的珠寶飾品。
+            典雅飾品成立於2010年，致力於為每位顧客提供高品質、風格獨特的珠寶飾品。
           </p>
         </div>
       </div>
@@ -21,13 +21,13 @@ const About = () => {
             <div>
               <h2 className="text-3xl font-bold mb-6">我們的故事</h2>
               <p className="text-gray-700 mb-4">
-                優雅飾品的故事始於創辦人李美玲的一個簡單願望：創造出既美麗又實用、既高雅又親民的珠寶飾品。
+                典雅飾品的故事始於創辦人李美玲的一個簡單願望：創造出既美麗又實用、既高雅又親民的珠寶飾品。
               </p>
               <p className="text-gray-700 mb-4">
                 畢業於紐約時尚設計學院的美玲，在國際知名珠寶品牌工作多年後，決定回到台灣創立自己的品牌。她相信珠寶不僅是裝飾品，更是情感的載體，每一件作品都應該有自己的故事和靈魂。
               </p>
               <p className="text-gray-700 mb-4">
-                從一間小工作室開始，優雅飾品如今已發展成為台灣知名的珠寶品牌，擁有多家實體店面和線上平台，服務遍及全台灣。
+                從一間小工作室開始，典雅飾品如今已發展成為台灣知名的珠寶品牌，擁有多家實體店面和線上平台，服務遍及全台灣。
               </p>
             </div>
             <div>
