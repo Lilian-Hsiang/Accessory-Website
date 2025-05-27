@@ -12,6 +12,7 @@ import CheckoutPage from "./pages/checkout/CheckoutPage";
 import PaymentPage from "./pages/checkout/PaymentPage";
 import OrderConfirmationPage from "./pages/checkout/OrderConfirmationPage";
 import NotFound from "./pages/NotFound";
+import Favorites from "./pages/Favorites";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/products/:category" element={<ProductsPage />} />
           <Route path="/products/:category/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/checkout/payment" element={<PaymentPage />} />
           <Route

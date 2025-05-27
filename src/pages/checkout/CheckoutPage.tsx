@@ -87,6 +87,8 @@ const CheckoutPage = () => {
                         updateCustomerInfo({ phone: e.target.value })
                       }
                       required
+                      pattern="^09\d{8}$" // 台灣手機號碼格式
+                      maxLength={10}
                     />
                   </div>
 
@@ -95,7 +97,7 @@ const CheckoutPage = () => {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="請���入Email"
+                      placeholder="請輸入Email"
                       value={checkoutState.customerInfo.email}
                       onChange={(e) =>
                         updateCustomerInfo({ email: e.target.value })

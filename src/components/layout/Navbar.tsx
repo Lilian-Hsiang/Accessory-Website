@@ -9,6 +9,8 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
+import { Heart } from "lucide-react";
 
 interface NavLinkProps {
   to: string;
@@ -34,6 +36,7 @@ const NavLink = ({ to, label, isActive, onClick }: NavLinkProps) => (
 const Navbar = () => {
   const location = useLocation();
   const { getTotalItems } = useCart();
+  const { getFavoritesCount } = useFavorites();
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [mobileSheetOpen, setMobileSheetOpen] = useState(false);
 
@@ -184,6 +187,30 @@ const Navbar = () => {
             <Button variant="ghost" size="icon" className="text-gray-600">
               <User className="h-5 w-5" />
             </Button>
+
+             {/* 收藏按鈕 */}
+            <Link
+              to="/favorites"
+              className={`relative p-2 transition-colors ${
+                isActive("/favorites")
+                  ? "text-red-500"
+                  : "text-gray-600 hover:text-red-500"
+              }`}
+              title="我的收藏"
+            >
+              <Heart
+                className={`h-5 w-5 transition-colors ${
+                  isActive("/favorites")
+                    ? "fill-red-500 text-red-500"
+                    : "hover:fill-red-100"
+                }`}
+              />
+              {getFavoritesCount() > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center animate-pulse">
+                  {getFavoritesCount()}
+                </span>
+              )}
+            </Link>
 
             {/* 購物車按鈕 */}
             <Link to="/cart" className="relative p-2">

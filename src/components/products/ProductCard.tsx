@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Product } from "@/types/product";
+import { Product } from "@/types/product.ts";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Heart } from "lucide-react";
 import { toast } from "sonner";
+import { useFavorites } from "@/contexts/FavoritesContext";
 
 
 interface ProductCardProps {
@@ -13,6 +14,8 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCart();
+  // 收藏
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const { id, name, price, images, category } = product;
 
   // 處理加入購物車事件
@@ -30,11 +33,33 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
   };
 
-  // 處理收藏按鈕點擊
-  const handleWishlist = (e: React.MouseEvent) => {
+  // // 處理收藏按鈕點擊
+  // const handleWishlist = (e: React.MouseEvent) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   toast.success(`已將 ${name} 加入收藏`);
+  // };
+
+  // 檢查是否已收藏
+  const isProductFavorite = isFavorite(id);
+
+  // 處理收藏切換事件
+  const handleToggleFavorite = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    toast.success(`已將 ${name} 加入收藏`);
+
+    try {
+      if (isProductFavorite) {
+        removeFromFavorites(id);
+        alert(`已將 ${name} 從收藏中移除`);
+      } else {
+        addToFavorites(product);
+        alert(`已將 ${name} 加入收藏`);
+      }
+    } catch (error) {
+      console.error("收藏操作失敗:", error);
+      alert("收藏操作失敗，請稍後再試");
+    }
   };
 
   // 格式化價格，加上千位分隔符
@@ -59,12 +84,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
           />
 
-          {/* 收藏按鈕 */}
+          {/* 愛心收藏按鈕 */}
           <button
-            onClick={handleWishlist}
-            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            onClick={handleToggleFavorite}
+            className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-200 shadow-sm z-10"
+            aria-label={isProductFavorite ? "移除收藏" : "加入收藏"}
           >
-            <Heart className="h-4 w-4 text-gray-600" />
+            <Heart
+              className={`h-4 w-4 transition-colors duration-200 ${
+                isProductFavorite
+                  ? "fill-red-500 text-red-500"
+                  : "text-gray-400 hover:text-red-400"
+              }`}
+            />
           </button>
 
           {/* 快速加入購物車覆蓋層 */}

@@ -5,6 +5,8 @@ import "./index.css";
 import { CartProvider } from "./contexts/CartContext";
 import { CheckoutProvider } from "./contexts/CheckoutContext";
 import { getStoredCart } from "./lib/cartStorage";
+import { FavoritesProvider } from "./contexts/FavoritesContext";
+
 
 // 購物車診斷功能
 const CART_STORAGE_KEY = "elegant_jewelry_cart";
@@ -28,7 +30,7 @@ const initializeApp = () => {
     if (legacyCart) {
       try {
         const parsedLegacyCart = JSON.parse(legacyCart);
-        console.log("發現舊購物車��據:", parsedLegacyCart.length, "件商品");
+        console.log("發現舊購物車數據:", parsedLegacyCart.length, "件商品");
 
         // 如果新存儲為空但舊存儲有數據，遷移數據
         if (storedCart.length === 0 && parsedLegacyCart.length > 0) {
@@ -41,6 +43,15 @@ const initializeApp = () => {
     } else {
       console.log("未發現舊購物車數據");
     }
+
+    // 檢查收藏數據
+    const favoritesData = localStorage.getItem("elegant_jewelry_favorites");
+    console.log(
+      "收藏數據:",
+      favoritesData
+        ? `找到 ${JSON.parse(favoritesData).length} 件收藏`
+        : "為空",
+    );
 
     // 顯示其他診斷信息
     console.log("localStorage 可用狀態:", typeof localStorage !== "undefined");
@@ -56,7 +67,9 @@ const initializeApp = () => {
     <React.StrictMode>
       <CartProvider>
         <CheckoutProvider>
-          <App />
+          <FavoritesProvider>
+            <App />
+          </FavoritesProvider>
         </CheckoutProvider>
       </CartProvider>
     </React.StrictMode>,
