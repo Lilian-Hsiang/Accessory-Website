@@ -18,6 +18,23 @@ const ProductsPage = () => {
     useState<ProductCategory | null>(null);
   const [showFilters, setShowFilters] = useState(false);
 
+  // 分頁
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 8; // 每頁顯示 8 筆
+
+  const totalPages = Math.ceil(products.length / productsPerPage);
+  const paginatedProducts = products.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
+  console.log("products", products, "totalPages", totalPages);
+
+  const handlePageChange = (page: number) => {
+  if (page >= 1 && page <= totalPages) {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" }); // 捲到頂部
+  }
+};
   // 確保購物車同步
   useInitCartSync();
 
@@ -37,6 +54,8 @@ const ProductsPage = () => {
       // 如果沒有指定分類，顯示所有產品
       sortProducts(allProducts, sortBy);
     }
+    // 當 category 或排序變動時，重設頁碼
+    setCurrentPage(1);
   }, [category, sortBy]);
 
   // 根據選擇的排序方式進行排序
@@ -197,9 +216,9 @@ const ProductsPage = () => {
           )}
 
           {/* 產品網格 */}
-          {products.length > 0 ? (
+          {paginatedProducts.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-              {products.map((product) => (
+              {paginatedProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
@@ -210,24 +229,36 @@ const ProductsPage = () => {
           )}
 
           {/* 分頁 */}
-          {products.length > 0 && (
+          {totalPages > 1 && (
             <div className="flex justify-center mt-12">
               <nav className="flex items-center gap-1">
-                <button className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
-                  &lt;
-                </button>
-                <button className="w-10 h-10 flex items-center justify-center rounded-full bg-[#C0A062] text-white">
-                  1
-                </button>
-                <button className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
-                  2
-                </button>
-                <button className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
-                  3
-                </button>
-                <button className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
-                  &gt;
-                </button>
+            <button
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              &lt;
+            </button>
+            {[...Array(totalPages)].map((_, idx) => (
+              <button
+                key={idx + 1}
+                className={`w-10 h-10 flex items-center justify-center rounded-full ${
+                  currentPage === idx + 1
+                    ? "bg-[#C0A062] text-white"
+                    : "border border-gray-300"
+                }`}
+                onClick={() => handlePageChange(idx + 1)}
+              >
+                {idx + 1}
+              </button>
+            ))}
+            <button
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              &gt;
+            </button>
               </nav>
             </div>
           )}
