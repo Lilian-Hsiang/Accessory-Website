@@ -50,9 +50,10 @@ const getStoredFavorites = (): Product[] => {
     if (!favoritesJSON) return [];
 
     const favorites = JSON.parse(favoritesJSON);
-    if (!Array.isArray(favorites)) return [];
-    // 驗證收藏項目的結構
-    return favorites.filter((product) => product && product.id && product.name);
+    // if (!Array.isArray(favorites)) return [];
+    // // 驗證收藏項目的結構
+    // return favorites.filter((product) => product && product.id && product.name);
+    return Array.isArray(favorites) ? favorites : [];
   } catch (error) {
     console.error("讀取收藏數據失敗:", error);
     return [];
@@ -81,7 +82,8 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
 
   // 當收藏更新時保存到本地存儲
   useEffect(() => {
-    storeFavorites(favorites);
+    // storeFavorites(favorites);
+    localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites));
     console.log("收藏已保存，項目數:", favorites.length);
   }, [favorites]);
 
@@ -92,13 +94,14 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
     setFavorites((currentFavorites) => {
       // 檢查商品是否已在收藏中
       const isAlreadyFavorite = currentFavorites.some(
-        (fav) => fav.id === product.id,
+        (fav) => String(fav.id) === String(product.id),
       );
 
       if (isAlreadyFavorite) {
         console.log("商品已在收藏中");
         return currentFavorites;
       }
+      
 
       const newFavorites = [...currentFavorites, product];
       console.log("收藏已更新，目前有", newFavorites.length, "個商品");
@@ -112,7 +115,7 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
 
     setFavorites((currentFavorites) => {
       const newFavorites = currentFavorites.filter(
-        (product) => product.id !== productId,
+        (product) => String(product.id) !== String(productId),
       );
       console.log("商品已移除，剩餘", newFavorites.length, "個收藏");
       return newFavorites;
@@ -121,8 +124,8 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
 
   // 檢查商品是否已收藏
   const isFavorite = useCallback(
-    (productId: string): boolean => {
-      return favorites.some((product) => product.id === productId);
+    (productId: string) => {
+      return favorites.some((fav) => String(fav.id) === String(productId));
     },
     [favorites],
   );

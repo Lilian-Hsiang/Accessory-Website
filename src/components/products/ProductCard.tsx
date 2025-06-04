@@ -40,8 +40,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   //   toast.success(`已將 ${name} 加入收藏`);
   // };
 
-  // 檢查是否已收藏
-  const isProductFavorite = isFavorite(id);
+  // 檢查是否已收藏 / 將產品ID轉為字串以匹配收藏存儲格式
+  const isProductFavorite = () => isFavorite(String(id));
 
   // 處理收藏切換事件
   const handleToggleFavorite = (e: React.MouseEvent) => {
@@ -49,8 +49,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     e.stopPropagation();
 
     try {
-      if (isProductFavorite) {
-        removeFromFavorites(id);
+      if (isProductFavorite()) {
+        removeFromFavorites(String(id));
         alert(`已將 ${name} 從收藏中移除`);
       } else {
         addToFavorites(product);
@@ -71,10 +71,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   }).format(price);
 
   return (
-    <Link
-      to={`/products/${getCategoryPath(category)}/${id}`}
-      className="group block"
-    >
+
       <div className="product-card bg-white">
         {/* 產品圖片 */}
         <div className="aspect-square overflow-hidden relative">
@@ -88,11 +85,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <button
             onClick={handleToggleFavorite}
             className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-200 shadow-sm z-10"
-            aria-label={isProductFavorite ? "移除收藏" : "加入收藏"}
+            aria-label={isProductFavorite() ? "移除收藏" : "加入收藏"}
           >
             <Heart
               className={`h-4 w-4 transition-colors duration-200 ${
-                isProductFavorite
+                isProductFavorite()
                   ? "fill-red-500 text-red-500"
                   : "text-gray-400 hover:text-red-400"
               }`}
@@ -113,6 +110,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         {/* 產品信息 */}
+      <Link
+        to={`/products/${getCategoryPath(category)}/${id}`}
+        className="group block"
+      >
         <div className="p-4 text-center">
           <div className="text-xs text-gray-500 mb-1">
             {categoryName(category)}
@@ -120,8 +121,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <h3 className="font-medium text-gray-900 text-sm mb-1">{name}</h3>
           <p className="product-price font-serif text-base">{formattedPrice}</p>
         </div>
-      </div>
     </Link>
+      </div>
   );
 };
 

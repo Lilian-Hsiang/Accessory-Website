@@ -11,6 +11,25 @@ import bracelet1_3 from "@/assets/homePage/bestSellers/bs_bracelet1-3.png";
 import bracelet2_1 from "@/assets/homePage/bestSellers/bs_bracelet2-1.png";
 import bracelet2_2 from "@/assets/homePage/bestSellers/bs_bracelet2-2.png";
 import bracelet2_3 from "@/assets/homePage/bestSellers/bs_bracelet2-3.png";
+import bracelet3_1 from "@/assets/bracelets/bracelet3_1.png";
+import bracelet3_2 from "@/assets/bracelets/bracelet3_2.png";
+import bracelet3_3 from "@/assets/bracelets/bracelet3_3.png";
+import bracelet4_1 from "@/assets/bracelets/bracelet4_1.png";
+import bracelet4_2 from "@/assets/bracelets/bracelet4_2.png";
+import bracelet4_3 from "@/assets/bracelets/bracelet4_3.png";
+import bracelet5_1 from "@/assets/bracelets/bracelet5_1.png";
+import bracelet5_2 from "@/assets/bracelets/bracelet5_2.png";
+import bracelet5_3 from "@/assets/bracelets/bracelet5_3.png";
+import bracelet6_1 from "@/assets/bracelets/bracelet6_1.png";
+import bracelet6_2 from "@/assets/bracelets/bracelet6_2.png";
+import bracelet6_3 from "@/assets/bracelets/bracelet6_3.png";
+import bracelet7_1 from "@/assets/bracelets/bracelet7_1.png";
+import bracelet7_2 from "@/assets/bracelets/bracelet7_2.png";
+import bracelet7_3 from "@/assets/bracelets/bracelet7_3.png";
+import bracelet8_1 from "@/assets/bracelets/bracelet8_1.png";
+import bracelet8_2 from "@/assets/bracelets/bracelet8_2.png";
+import bracelet8_3 from "@/assets/bracelets/bracelet8_3.png";
+
 import ring1_1 from "@/assets/homePage/bestSellers/bs_ring1-1.png";
 import ring1_2 from "@/assets/homePage/bestSellers/bs_ring1-2.png";
 import ring1_3 from "@/assets/homePage/bestSellers/bs_ring1-3.png";
@@ -44,6 +63,52 @@ import earrings8_3 from "@/assets/earrings/earrings8_3.png";
 import earrings9_1 from "@/assets/earrings/earrings9_1.png";
 import earrings9_2 from "@/assets/earrings/earrings9_2.png";
 import earrings9_3 from "@/assets/earrings/earrings9_3.png";
+import earrings10_1 from "@/assets/earrings/earrings10_1.png";
+import earrings10_2 from "@/assets/earrings/earrings10_2.png";
+import earrings10_3 from "@/assets/earrings/earrings10_3.png";
+import earrings11_1 from "@/assets/earrings/earrings11_1.png";
+import earrings11_2 from "@/assets/earrings/earrings11_2.png";
+import earrings11_3 from "@/assets/earrings/earrings11_3.png";
+import earrings12_1 from "@/assets/earrings/earrings12_1.png";
+import earrings12_2 from "@/assets/earrings/earrings12_2.png";
+import earrings12_3 from "@/assets/earrings/earrings12_3.png";
+import earrings13_1 from "@/assets/earrings/earrings13_1.png";
+import earrings13_2 from "@/assets/earrings/earrings13_2.png";
+import earrings13_3 from "@/assets/earrings/earrings13_3.png";
+import earrings14_1 from "@/assets/earrings/earrings14_1.png";
+import earrings14_2 from "@/assets/earrings/earrings14_2.png";
+import earrings14_3 from "@/assets/earrings/earrings14_3.png";
+import earrings15_1 from "@/assets/earrings/earrings15_1.png";
+import earrings15_2 from "@/assets/earrings/earrings15_2.png";
+import earrings15_3 from "@/assets/earrings/earrings15_3.png";
+import earrings16_1 from "@/assets/earrings/earrings16_1.png";
+import earrings16_2 from "@/assets/earrings/earrings16_2.png";
+import earrings16_3 from "@/assets/earrings/earrings16_3.png";
+import earrings17_1 from "@/assets/earrings/earrings17_1.png";
+import earrings17_2 from "@/assets/earrings/earrings17_2.png";
+import earrings17_3 from "@/assets/earrings/earrings17_3.png";
+import earrings18_1 from "@/assets/earrings/earrings18_1.png";
+import earrings18_2 from "@/assets/earrings/earrings18_2.png";
+import earrings18_3 from "@/assets/earrings/earrings18_3.png";
+import earrings19_1 from "@/assets/earrings/earrings19_1.png";
+import earrings19_2 from "@/assets/earrings/earrings19_2.png";
+import earrings19_3 from "@/assets/earrings/earrings19_3.png";
+import earrings20_1 from "@/assets/earrings/earrings20_1.png";
+import earrings20_2 from "@/assets/earrings/earrings20_2.png";
+import earrings20_3 from "@/assets/earrings/earrings20_3.png";
+import earrings21_1 from "@/assets/earrings/earrings21_1.png";
+import earrings21_2 from "@/assets/earrings/earrings21_2.png";
+import earrings21_3 from "@/assets/earrings/earrings21_3.png";
+import earrings22_1 from "@/assets/earrings/earrings22_1.png";
+import earrings22_2 from "@/assets/earrings/earrings22_2.png";
+import earrings22_3 from "@/assets/earrings/earrings22_3.png";
+import earrings23_1 from "@/assets/earrings/earrings23_1.png";
+import earrings23_2 from "@/assets/earrings/earrings23_2.png";
+import earrings23_3 from "@/assets/earrings/earrings23_3.png";
+import earrings24_1 from "@/assets/earrings/earrings24_1.png";
+import earrings24_2 from "@/assets/earrings/earrings24_2.png";
+import earrings24_3 from "@/assets/earrings/earrings24_3.png";
+
 import necklace3_1 from "@/assets/necklaces/necklace3_1.png";
 import necklace3_2 from "@/assets/necklaces/necklace3_2.png";
 import necklace3_3 from "@/assets/necklaces/necklace3_3.png";
@@ -110,6 +175,7 @@ import necklace23_3 from "@/assets/necklaces/necklace23_3.png";
 import necklace24_1 from "@/assets/necklaces/necklace24_1.png";
 import necklace24_2 from "@/assets/necklaces/necklace24_2.png";
 import necklace24_3 from "@/assets/necklaces/necklace24_3.png";
+import { i } from "node_modules/vite/dist/node/types.d-aGj9QkWt";
 
 
 // 用於生成隨機ID的輔助函數
@@ -135,7 +201,17 @@ const createProducts = (): Product[] => {
     const count = 24; // 每個類別的產品數量
 
     for (let i = 0; i < count; i++) {
-      const id = generateId();
+      // 用「類別英文+序號」組成唯一且固定的 id
+      const categoryKey = (() => {
+        switch (category) {
+          case "項鍊": return "necklace";
+          case "手鍊": return "bracelet";
+          case "戒指": return "ring";
+          case "耳環": return "earring";
+          default: return "product";
+        }
+      })();
+      const id = `${categoryKey}-${i + 1}`;
       const isFeatured = i < 2; // 前兩個是精選產品
 
       // 根據類別和索引自訂圖片
@@ -192,7 +268,20 @@ const createProducts = (): Product[] => {
         images = [bracelet1_1, bracelet1_2, bracelet1_3];
       } else if (category === "手鍊" && i === 1) {
         images = [bracelet2_1, bracelet2_2, bracelet2_3];
-      } else if (category === "戒指" && i === 0) {
+      } else if (category === "手鍊" && i === 2) {
+        images = [bracelet3_1, bracelet3_2, bracelet3_3];
+      } else if (category === "手鍊" && i === 3) {
+        images = [bracelet4_1, bracelet4_2, bracelet4_3];
+      } else if (category === "手鍊" && i === 4) {
+        images = [bracelet5_1, bracelet5_2, bracelet5_3];
+      } else if (category === "手鍊" && i === 5) {
+        images = [bracelet6_1, bracelet6_2, bracelet6_3];
+      } else if (category === "手鍊" && i === 6) {
+        images = [bracelet7_1, bracelet7_2, bracelet7_3];
+      } else if (category === "手鍊" && i === 7) {
+        images = [bracelet8_1, bracelet8_2, bracelet8_3];
+      } 
+      else if (category === "戒指" && i === 0) {
         images = [ring1_1, ring1_2, ring1_3];
       } else if (category === "戒指" && i === 1) {
         images = [ring2_1, ring2_2, ring2_3];
@@ -214,8 +303,37 @@ const createProducts = (): Product[] => {
         images = [earrings8_1, earrings8_2, earrings8_3];
       } else if (category === "耳環" && i === 8) {
         images = [earrings9_1, earrings9_2, earrings9_3];
-      } 
-      else {
+      } else if (category === "耳環" && i === 9) {
+        images = [earrings10_1, earrings10_2, earrings10_3];
+      } else if (category === "耳環" && i === 10) {
+        images = [earrings11_1, earrings11_2, earrings11_3];
+      } else if (category === "耳環" && i === 11) {
+        images = [earrings12_1, earrings12_2, earrings12_3];
+      } else if (category === "耳環" && i === 12) {
+        images = [earrings13_1, earrings13_2, earrings13_3];
+      } else if (category === "耳環" && i === 13) {
+        images = [earrings14_1, earrings14_2, earrings14_3];
+      } else if (category === "耳環" && i === 14) {
+        images = [earrings15_1, earrings15_2, earrings15_3];
+      } else if (category === "耳環" && i === 15) {
+        images = [earrings16_1, earrings16_2, earrings16_3];
+      } else if (category === "耳環" && i === 16) {
+        images = [earrings17_1, earrings17_2, earrings17_3];
+      } else if (category === "耳環" && i === 17) {
+        images = [earrings18_1, earrings18_2, earrings18_3];
+      } else if (category === "耳環" && i === 18) {
+        images = [earrings19_1, earrings19_2, earrings19_3];
+      } else if (category === "耳環" && i === 19) {
+        images = [earrings20_1, earrings20_2, earrings20_3];
+      } else if (category === "耳環" && i === 20) {
+        images = [earrings21_1, earrings21_2, earrings21_3];
+      } else if (category === "耳環" && i === 21) {
+        images = [earrings22_1, earrings22_2, earrings22_3];
+      } else if (category === "耳環" && i === 22) {
+        images = [earrings23_1, earrings23_2, earrings23_3];
+      } else if (category === "耳環" && i === 23) {
+        images = [earrings24_1, earrings24_2, earrings24_3];
+      } else {
         images = [
           getImagePlaceholder(i),
           getImagePlaceholder(i + 1),
