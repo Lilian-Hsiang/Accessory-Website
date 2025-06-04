@@ -29,6 +29,36 @@ import bracelet7_3 from "@/assets/bracelets/bracelet7_3.png";
 import bracelet8_1 from "@/assets/bracelets/bracelet8_1.png";
 import bracelet8_2 from "@/assets/bracelets/bracelet8_2.png";
 import bracelet8_3 from "@/assets/bracelets/bracelet8_3.png";
+import bracelet9_1 from "@/assets/bracelets/bracelet9_1.png";
+import bracelet9_2 from "@/assets/bracelets/bracelet9_2.png";
+import bracelet9_3 from "@/assets/bracelets/bracelet9_3.png";
+import bracelet10_1 from "@/assets/bracelets/bracelet10_1.png";
+import bracelet10_2 from "@/assets/bracelets/bracelet10_2.png";
+import bracelet10_3 from "@/assets/bracelets/bracelet10_3.png";
+import bracelet11_1 from "@/assets/bracelets/bracelet11_1.png";
+import bracelet11_2 from "@/assets/bracelets/bracelet11_2.png";
+import bracelet11_3 from "@/assets/bracelets/bracelet11_3.png";
+import bracelet12_1 from "@/assets/bracelets/bracelet12_1.png";
+import bracelet12_2 from "@/assets/bracelets/bracelet12_2.png";
+import bracelet12_3 from "@/assets/bracelets/bracelet12_3.png";
+import bracelet13_1 from "@/assets/bracelets/bracelet13_1.png";
+import bracelet13_2 from "@/assets/bracelets/bracelet13_2.png";
+import bracelet13_3 from "@/assets/bracelets/bracelet13_3.png";
+import bracelet14_1 from "@/assets/bracelets/bracelet14_1.png";
+import bracelet14_2 from "@/assets/bracelets/bracelet14_2.png";
+import bracelet14_3 from "@/assets/bracelets/bracelet14_3.png";
+import bracelet15_1 from "@/assets/bracelets/bracelet15_1.png";
+import bracelet15_2 from "@/assets/bracelets/bracelet15_2.png";
+import bracelet15_3 from "@/assets/bracelets/bracelet15_3.png";
+import bracelet16_1 from "@/assets/bracelets/bracelet16_1.png";
+import bracelet16_2 from "@/assets/bracelets/bracelet16_2.png";
+import bracelet16_3 from "@/assets/bracelets/bracelet16_3.png";
+import bracelet17_1 from "@/assets/bracelets/bracelet17_1.png";
+import bracelet17_2 from "@/assets/bracelets/bracelet17_2.png";
+import bracelet17_3 from "@/assets/bracelets/bracelet17_3.png";
+import bracelet18_1 from "@/assets/bracelets/bracelet18_1.png";
+import bracelet18_2 from "@/assets/bracelets/bracelet18_2.png";
+import bracelet18_3 from "@/assets/bracelets/bracelet18_3.png";
 
 import ring1_1 from "@/assets/homePage/bestSellers/bs_ring1-1.png";
 import ring1_2 from "@/assets/homePage/bestSellers/bs_ring1-2.png";
@@ -280,8 +310,27 @@ const createProducts = (): Product[] => {
         images = [bracelet7_1, bracelet7_2, bracelet7_3];
       } else if (category === "手鍊" && i === 7) {
         images = [bracelet8_1, bracelet8_2, bracelet8_3];
-      } 
-      else if (category === "戒指" && i === 0) {
+      } else if (category === "手鍊" && i === 8) {
+        images = [bracelet9_1, bracelet9_2, bracelet9_3];
+      } else if (category === "手鍊" && i === 9) {
+        images = [bracelet10_1, bracelet10_2, bracelet10_3];
+      } else if (category === "手鍊" && i === 10) {
+        images = [bracelet11_1, bracelet11_2, bracelet11_3];
+      } else if (category === "手鍊" && i === 11) {
+        images = [bracelet12_1, bracelet12_2, bracelet12_3];
+      } else if (category === "手鍊" && i === 12) {
+        images = [bracelet13_1, bracelet13_2, bracelet13_3];
+      } else if (category === "手鍊" && i === 13) {
+        images = [bracelet14_1, bracelet14_2, bracelet14_3];
+      } else if (category === "手鍊" && i === 14) {
+        images = [bracelet15_1, bracelet15_2, bracelet15_3];
+      } else if (category === "手鍊" && i === 15) {
+        images = [bracelet16_1, bracelet16_2, bracelet16_3];
+      } else if (category === "手鍊" && i === 16) {
+        images = [bracelet17_1, bracelet17_2, bracelet17_3];
+      } else if (category === "手鍊" && i === 17) {
+        images = [bracelet18_1, bracelet18_2, bracelet18_3];
+      } else if (category === "戒指" && i === 0) {
         images = [ring1_1, ring1_2, ring1_3];
       } else if (category === "戒指" && i === 1) {
         images = [ring2_1, ring2_2, ring2_3];
