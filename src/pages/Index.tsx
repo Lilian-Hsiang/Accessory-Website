@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,10 @@ const Index = () => {
     setEmail("");
     setTimeout(() => setSubscribed(false), 4000); // 4秒後自動隱藏訊息
   };
+
+  useEffect(() => {
+  console.log("首頁 Index.tsx 已載入");
+}, []);
 
   return (
     <Layout>

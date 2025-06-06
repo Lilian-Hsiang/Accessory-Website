@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 3001,
   },
+  base: '/Accessory-Website/', // put your github repository name
   plugins: [react()],
   resolve: {
     alias: {
