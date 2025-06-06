@@ -144,7 +144,7 @@ const BuyingGuide = () => {
         </div>
 
         {/* 客服資訊 */}
-        <div className="bg-primary/5 rounded-lg p-8 text-center">
+        <div className="rounded-lg p-8 text-center" style={{backgroundColor: '#efe7d6'}}>
           <h2 className="text-2xl font-bold mb-4">需要協助？</h2>
           <p className="text-gray-600 mb-6">
             我們的專業客服團隊隨時為您提供購買建議和產品諮詢

@@ -266,7 +266,7 @@ const FAQ = () => {
         </div>
 
         {/* 聯繫客服 */}
-        <div className="bg-primary/5 rounded-lg p-8 mt-12">
+        <div className="rounded-lg p-8 mt-12" style={{backgroundColor: '#efe7d6'}}>
           <h2 className="text-2xl font-bold text-center mb-6">
             還是找不到答案？
           </h2>

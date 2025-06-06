@@ -59,6 +59,24 @@ import bracelet17_3 from "@/assets/bracelets/bracelet17_3.png";
 import bracelet18_1 from "@/assets/bracelets/bracelet18_1.png";
 import bracelet18_2 from "@/assets/bracelets/bracelet18_2.png";
 import bracelet18_3 from "@/assets/bracelets/bracelet18_3.png";
+import bracelet19_1 from "@/assets/bracelets/bracelet19_1.png";
+import bracelet19_2 from "@/assets/bracelets/bracelet19_2.png";
+import bracelet19_3 from "@/assets/bracelets/bracelet19_3.png";
+import bracelet20_1 from "@/assets/bracelets/bracelet20_1.png";
+import bracelet20_2 from "@/assets/bracelets/bracelet20_2.png";
+import bracelet20_3 from "@/assets/bracelets/bracelet20_3.png";
+import bracelet21_1 from "@/assets/bracelets/bracelet21_1.png";
+import bracelet21_2 from "@/assets/bracelets/bracelet21_2.png";
+import bracelet21_3 from "@/assets/bracelets/bracelet21_3.png";
+import bracelet22_1 from "@/assets/bracelets/bracelet22_1.png";
+import bracelet22_2 from "@/assets/bracelets/bracelet22_2.png";
+import bracelet22_3 from "@/assets/bracelets/bracelet22_3.png";
+import bracelet23_1 from "@/assets/bracelets/bracelet23_1.png";
+import bracelet23_2 from "@/assets/bracelets/bracelet23_2.png";
+import bracelet23_3 from "@/assets/bracelets/bracelet23_3.png";
+import bracelet24_1 from "@/assets/bracelets/bracelet24_1.png";
+import bracelet24_2 from "@/assets/bracelets/bracelet24_2.png";
+import bracelet24_3 from "@/assets/bracelets/bracelet24_3.png";
 
 import ring1_1 from "@/assets/homePage/bestSellers/bs_ring1-1.png";
 import ring1_2 from "@/assets/homePage/bestSellers/bs_ring1-2.png";
@@ -66,6 +84,73 @@ import ring1_3 from "@/assets/homePage/bestSellers/bs_ring1-3.png";
 import ring2_1 from "@/assets/homePage/bestSellers/bs_ring2-1.png";
 import ring2_2 from "@/assets/homePage/bestSellers/bs_ring2-2.png";
 import ring2_3 from "@/assets/homePage/bestSellers/bs_ring2-3.png";
+import ring3_1 from "@/assets/rings/ring3_1.png";
+import ring3_2 from "@/assets/rings/ring3_2.png";
+import ring3_3 from "@/assets/rings/ring3_3.png";
+import ring4_1 from "@/assets/rings/ring4_1.png";
+import ring4_2 from "@/assets/rings/ring4_2.png";
+import ring4_3 from "@/assets/rings/ring4_3.png";
+import ring5_1 from "@/assets/rings/ring5_1.png";
+import ring5_2 from "@/assets/rings/ring5_2.png";
+import ring5_3 from "@/assets/rings/ring5_3.png";
+import ring6_1 from "@/assets/rings/ring6_1.png";
+import ring6_2 from "@/assets/rings/ring6_2.png";
+import ring6_3 from "@/assets/rings/ring6_3.png";
+import ring7_1 from "@/assets/rings/ring7_1.png";
+import ring7_2 from "@/assets/rings/ring7_2.png";
+import ring7_3 from "@/assets/rings/ring7_3.png";
+import ring8_1 from "@/assets/rings/ring8_1.png";
+import ring8_2 from "@/assets/rings/ring8_2.png";
+import ring8_3 from "@/assets/rings/ring8_3.png";
+import ring9_1 from "@/assets/rings/ring9_1.png";
+import ring9_2 from "@/assets/rings/ring9_2.png";
+import ring9_3 from "@/assets/rings/ring9_3.png";
+import ring10_1 from "@/assets/rings/ring10_1.png";
+import ring10_2 from "@/assets/rings/ring10_2.png";
+import ring10_3 from "@/assets/rings/ring10_3.png";
+import ring11_1 from "@/assets/rings/ring11_1.png";
+import ring11_2 from "@/assets/rings/ring11_2.png";
+import ring11_3 from "@/assets/rings/ring11_3.png";
+import ring12_1 from "@/assets/rings/ring12_1.png";
+import ring12_2 from "@/assets/rings/ring12_2.png";
+import ring12_3 from "@/assets/rings/ring12_3.png";
+import ring13_1 from "@/assets/rings/ring13_1.png";
+import ring13_2 from "@/assets/rings/ring13_2.png";
+import ring13_3 from "@/assets/rings/ring13_3.png";
+import ring14_1 from "@/assets/rings/ring14_1.png";
+import ring14_2 from "@/assets/rings/ring14_2.png";
+import ring14_3 from "@/assets/rings/ring14_3.png";
+import ring15_1 from "@/assets/rings/ring15_1.png";
+import ring15_2 from "@/assets/rings/ring15_2.png";
+import ring15_3 from "@/assets/rings/ring15_3.png";
+import ring16_1 from "@/assets/rings/ring16_1.png";
+import ring16_2 from "@/assets/rings/ring16_2.png";
+import ring16_3 from "@/assets/rings/ring16_3.png";
+import ring17_1 from "@/assets/rings/ring17_1.png";
+import ring17_2 from "@/assets/rings/ring17_2.png";
+import ring17_3 from "@/assets/rings/ring17_3.png";
+import ring18_1 from "@/assets/rings/ring18_1.png";
+import ring18_2 from "@/assets/rings/ring18_2.png";
+import ring18_3 from "@/assets/rings/ring18_3.png";
+import ring19_1 from "@/assets/rings/ring19_1.png";
+import ring19_2 from "@/assets/rings/ring19_2.png";
+import ring19_3 from "@/assets/rings/ring19_3.png";
+import ring20_1 from "@/assets/rings/ring20_1.png";
+import ring20_2 from "@/assets/rings/ring20_2.png";
+import ring20_3 from "@/assets/rings/ring20_3.png";
+import ring21_1 from "@/assets/rings/ring21_1.png";
+import ring21_2 from "@/assets/rings/ring21_2.png";
+import ring21_3 from "@/assets/rings/ring21_3.png";
+import ring22_1 from "@/assets/rings/ring22_1.png";
+import ring22_2 from "@/assets/rings/ring22_2.png";
+import ring22_3 from "@/assets/rings/ring22_3.png";
+import ring23_1 from "@/assets/rings/ring23_1.png";
+import ring23_2 from "@/assets/rings/ring23_2.png";
+import ring23_3 from "@/assets/rings/ring23_3.png";
+import ring24_1 from "@/assets/rings/ring24_1.png";
+import ring24_2 from "@/assets/rings/ring24_2.png";
+import ring24_3 from "@/assets/rings/ring24_3.png";
+
 import earrings1_1 from "@/assets/homePage/bestSellers/bs_earrings1-1.png";
 import earrings1_2 from "@/assets/homePage/bestSellers/bs_earrings1-2.png";
 import earrings1_3 from "@/assets/homePage/bestSellers/bs_earrings1-3.png";
@@ -330,10 +415,68 @@ const createProducts = (): Product[] => {
         images = [bracelet17_1, bracelet17_2, bracelet17_3];
       } else if (category === "手鍊" && i === 17) {
         images = [bracelet18_1, bracelet18_2, bracelet18_3];
+      } else if (category === "手鍊" && i === 18) {
+        images = [bracelet19_1, bracelet19_2, bracelet19_3];
+      } else if (category === "手鍊" && i === 19) {
+        images = [bracelet20_1, bracelet20_2, bracelet20_3];
+      } else if (category === "手鍊" && i === 20) {
+        images = [bracelet21_1, bracelet21_2, bracelet21_3];
+      } else if (category === "手鍊" && i === 21) {
+        images = [bracelet22_1, bracelet22_2, bracelet22_3];
+      } else if (category === "手鍊" && i === 22) {
+        images = [bracelet23_1, bracelet23_2, bracelet23_3];
+      } else if (category === "手鍊" && i === 23) {
+        images = [bracelet24_1, bracelet24_2, bracelet24_3];
       } else if (category === "戒指" && i === 0) {
         images = [ring1_1, ring1_2, ring1_3];
       } else if (category === "戒指" && i === 1) {
         images = [ring2_1, ring2_2, ring2_3];
+      } else if (category === "戒指" && i === 2) {
+        images = [ring3_1, ring3_2, ring3_3];
+      } else if (category === "戒指" && i === 3) {
+        images = [ring4_1, ring4_2, ring4_3];
+      } else if (category === "戒指" && i === 4) {
+        images = [ring5_1, ring5_2, ring5_3];
+      } else if (category === "戒指" && i === 5) {
+        images = [ring6_1, ring6_2, ring6_3];
+      } else if (category === "戒指" && i === 6) {
+        images = [ring7_1, ring7_2, ring7_3];
+      } else if (category === "戒指" && i === 7) {
+        images = [ring8_1, ring8_2, ring8_3];
+      } else if (category === "戒指" && i === 8) {
+        images = [ring9_1, ring9_2, ring9_3];
+      } else if (category === "戒指" && i === 9) {
+        images = [ring10_1, ring10_2, ring10_3];
+      } else if (category === "戒指" && i === 10) {
+        images = [ring11_1, ring11_2, ring11_3];
+      } else if (category === "戒指" && i === 11) {
+        images = [ring12_1, ring12_2, ring12_3];
+      } else if (category === "戒指" && i === 12) {
+        images = [ring13_1, ring13_2, ring13_3];
+      } else if (category === "戒指" && i === 13) {
+        images = [ring14_1, ring14_2, ring14_3];
+      } else if (category === "戒指" && i === 14) {
+        images = [ring15_1, ring15_2, ring15_3];
+      } else if (category === "戒指" && i === 15) {
+        images = [ring16_1, ring16_2, ring16_3];
+      } else if (category === "戒指" && i === 16) {
+        images = [ring17_1, ring17_2, ring17_3];
+      } else if (category === "戒指" && i === 17) {
+        images = [ring18_1, ring18_2, ring18_3];
+      } else if (category === "戒指" && i === 18) {
+        images = [ring19_1, ring19_2, ring19_3];
+      } else if (category === "戒指" && i === 19) {
+        images = [ring20_1, ring20_2, ring20_3];
+      } else if (category === "戒指" && i === 20) {
+        images = [ring21_1, ring21_2, ring21_3];
+      } else if (category === "戒指" && i === 21) {
+        images = [ring22_1, ring22_2, ring22_3];
+      } else if (category === "戒指" && i === 22) {
+        images = [ring23_1, ring23_2, ring23_3];
+      } else if (category === "戒指" && i === 23) {
+        images = [ring24_1, ring24_2, ring24_3];
+      } else if (category === "戒指" && i === 14) {
+        images = [ring15_1, ring15_2, ring15_3];
       } else if (category === "耳環" && i === 0) {
         images = [earrings1_1, earrings1_2, earrings1_3];
       } else if (category === "耳環" && i === 1) {

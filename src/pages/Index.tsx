@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,17 @@ import bracelet1 from '../assets/homePage/bracelet1.jpg';
 
 const Index = () => {
   const featuredProducts = getFeaturedProducts();
+   const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setSubscribed(true);
+    // 這裡可以加上實際寄送 email 的 API 呼叫
+    setEmail("");
+    setTimeout(() => setSubscribed(false), 4000); // 4秒後自動隱藏訊息
+  };
 
   return (
     <Layout>
@@ -336,16 +347,24 @@ const Index = () => {
           <p className="text-gray-300 mb-8 max-w-xl mx-auto">
             訂閱我們的電子報，搶先了解最新產品、獨家優惠和珠寶保養小貼士
           </p>
-          <div className="flex max-w-md mx-auto">
+          <form className="flex max-w-md mx-auto" onSubmit={handleSubscribe}>
             <input
               type="email"
               placeholder="請輸入您的Email"
-              className="flex-grow bg-[#3D3C3A] border-none text-white px-4 py-3 rounded-l-full focus:outline-none"
+              className="flex-grow bg-[#3D3C3A] border-none text-white px-4 rounded-l-full focus:outline-none"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
-            <Button className="bg-[#C0A062] hover:bg-[#A8894F] text-white rounded-r-full">
+            <Button type="submit" className="bg-[#C0A062] hover:bg-[#A8894F] text-white rounded-r-full">
               訂閱
             </Button>
-          </div>
+                    </form>
+          {subscribed && (
+            <div className="mt-6 text-[#C0A062] font-semibold">
+              訂閱完成！已將優惠碼寄送至您的信箱
+            </div>
+          )}
         </div>
       </section>
     </Layout>

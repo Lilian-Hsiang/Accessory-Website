@@ -1,11 +1,16 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
+import brandStory from "@/assets/homePage/brandStory_2.png";
+import founder1 from "@/assets/founders/founder1.png";
+import founder2 from "@/assets/founders/founder2.png";
+import founder3 from "@/assets/founders/founder3.png";
+import store from "@/assets/store.png"
 
 const About = () => {
   return (
     <Layout>
       {/* 頁面標題 */}
-      <div className="bg-primary/5 py-12">
+      <div className="py-12" style={{backgroundColor: '#efe7d6'}}>
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold text-center">關於我們</h1>
           <p className="text-center text-gray-600 mt-4 max-w-2xl mx-auto">
@@ -21,7 +26,7 @@ const About = () => {
             <div>
               <h2 className="text-3xl font-bold mb-6">我們的故事</h2>
               <p className="text-gray-700 mb-4">
-                典雅飾品的故事始於創辦人李美玲的一個簡單願望：創造出既美麗又實用、既高雅又親民的珠寶飾品。
+                典雅飾品的故事始於創辦人莉莉安的一個簡單願望：創造出既美麗又實用、既高雅又親民的珠寶飾品。
               </p>
               <p className="text-gray-700 mb-4">
                 畢業於紐約時尚設計學院的美玲，在國際知名珠寶品牌工作多年後，決定回到台灣創立自己的品牌。她相信珠寶不僅是裝飾品，更是情感的載體，每一件作品都應該有自己的故事和靈魂。
@@ -32,7 +37,8 @@ const About = () => {
             </div>
             <div>
               <img
-                src="https://via.placeholder.com/600x400/F3F4F6/000000?text=品牌故事"
+                // style={{objectFit: "cover", height: "100%" }}
+                src={brandStory}
                 alt="品牌故事"
                 className="rounded-lg shadow-lg"
               />
@@ -42,7 +48,7 @@ const About = () => {
       </section>
 
       {/* 我們的價值 */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16" style={{backgroundColor: '#fbf9f2'}}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">我們的價值</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -114,21 +120,21 @@ const About = () => {
           <h2 className="text-3xl font-bold text-center mb-12">我們的團隊</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <TeamMember
-              name="李美玲"
+              name="莉莉安"
               title="創辦人 & 首席設計師"
-              image="https://via.placeholder.com/300x300/F3F4F6/000000?text=李美玲"
+              image={founder1}
               description="畢業於紐約時尚設計學院，擁有超過15年的珠寶設計經驗。"
             />
             <TeamMember
-              name="張志明"
+              name="奧莉薇"
               title="工藝總監"
-              image="https://via.placeholder.com/300x300/F3F4F6/000000?text=張志明"
+              image={founder2}
               description="師承台灣傳統金工藝師，專精於金屬工藝，帶領工藝團隊確保每件作品的完美呈現。"
             />
             <TeamMember
-              name="王雅婷"
+              name="梅妮莎"
               title="市場營銷總監"
-              image="https://via.placeholder.com/300x300/F3F4F6/000000?text=王雅婷"
+              image={founder3}
               description="擁有豐富的品牌行銷經驗，負責品牌形象塑造和市場推廣策略。"
             />
           </div>
@@ -136,7 +142,7 @@ const About = () => {
       </section>
 
       {/* 我們的承諾 */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16" style={{backgroundColor: '#fbf9f2'}}>
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-8">我們的承諾</h2>
           <p className="text-gray-700 max-w-3xl mx-auto mb-10 text-lg">
@@ -231,9 +237,9 @@ const About = () => {
                   </div>
                 </div>
               </div>
-              <div>
+              <div style={{height: '600px'}}>
                 <img
-                  src="https://via.placeholder.com/600x400/F3F4F6/000000?text=門市照片"
+                  src={store}
                   alt="門市照片"
                   className="w-full h-full object-cover"
                 />
