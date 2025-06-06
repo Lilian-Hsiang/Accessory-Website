@@ -72,7 +72,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
 
-      <div className="product-card bg-white">
+      <div className="product-card bg-white group">
         {/* 產品圖片 */}
         <div className="aspect-square overflow-hidden relative">
           <img
@@ -97,7 +97,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </button>
 
           {/* 快速加入購物車覆蓋層 */}
-          <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="absolute inset-0 z-10 bg-black bg-opacity-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
             <Button
               onClick={handleAddToCart}
               size="sm"
