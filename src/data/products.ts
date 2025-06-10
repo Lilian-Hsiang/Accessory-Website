@@ -290,7 +290,6 @@ import necklace23_3 from "@/assets/necklaces/necklace23_3.png";
 import necklace24_1 from "@/assets/necklaces/necklace24_1.png";
 import necklace24_2 from "@/assets/necklaces/necklace24_2.png";
 import necklace24_3 from "@/assets/necklaces/necklace24_3.png";
-import { i } from "node_modules/vite/dist/node/types.d-aGj9QkWt";
 
 
 // 用於生成隨機ID的輔助函數
@@ -550,6 +549,7 @@ const createProducts = (): Product[] => {
 };
 
 export const products = createProducts();
+// export const getAllProducts = () => products;
 
 // 獲取特定分類的產品
 export const getProductsByCategory = (category: ProductCategory): Product[] => {

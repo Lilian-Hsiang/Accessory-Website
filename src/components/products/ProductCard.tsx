@@ -84,7 +84,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {/* 愛心收藏按鈕 */}
           <button
             onClick={handleToggleFavorite}
-            className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-200 shadow-sm z-10"
+            className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-200 shadow-sm z-50"
             aria-label={isProductFavorite() ? "移除收藏" : "加入收藏"}
           >
             <Heart
