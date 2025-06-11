@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, ShoppingCart, X, Search, User } from "lucide-react";
+import { Menu, ShoppingCart, X, Search, User, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -12,7 +12,9 @@ import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { Heart } from "lucide-react";
 import { users } from "@/data/users";
-import { getAllProducts } from "@/data/products"
+import { toast } from "sonner";
+const { getFavoritesCount, clearFavorites } = useFavorites();
+// import { getAllProducts } from "@/data/products"
 
 interface NavLinkProps {
   to: string;
@@ -46,7 +48,7 @@ const Navbar = () => {
   localStorage.getItem("isLoggedIn") === "true"
 );
     const [loginDialogOpen, setLoginDialogOpen] = useState(false); // 控制登入 Dialog
-  const [username, setUsername] = useState(""); // 使用者輸入的帳號
+  const [username, setUsername] = useState(localStorage.getItem("username") || "");
   const [password, setPassword] = useState(""); // 使用者輸入的密碼
 
   const handleLogin = () => {
@@ -58,9 +60,9 @@ const Navbar = () => {
       localStorage.setItem("isLoggedIn", "true"); // 將登入狀態存入 localStorage
       localStorage.setItem("username", user.username); // 儲存使用者名稱
       setLoginDialogOpen(false);
-      alert("登入成功！");
+      toast.success("登入成功！");
     } else {
-      alert("帳號或密碼錯誤！");
+      toast.error("帳號或密碼錯誤！");
     }
   };
 
@@ -68,7 +70,12 @@ const Navbar = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("isLoggedIn"); // 移除登入狀態
     localStorage.removeItem("username"); // 移除使用者名稱
-    alert("已登出！");
+    // localStorage.removeItem("elegant_jewelry_favorites"); // 移除收藏
+    localStorage.removeItem("favorites");
+    localStorage.removeItem("elegant_jewelry_cart"); // 移除購物車
+    clearFavorites(); 
+    toast.success("登出成功！");
+    window.dispatchEvent(new Event("storage")); // 通知其他元件更新
   };
   // const navigate = useNavigate();
   // const allProducts = getAllProducts();
@@ -316,12 +323,11 @@ const Navbar = () => {
           </div>
         </div>
       )} */}
-
+            <span>{isLoggedIn ? `哈囉，${username}`: ''}</span>
             {/* 用戶按鈕 */}
             <Button variant="ghost" size="icon" className="text-gray-600" onClick={() => (isLoggedIn ? handleLogout() : setLoginDialogOpen(true))}>
-              <User className="h-5 w-5" />
-              {/* {isLoggedIn ? `哈囉，${username}`: ''} */}
-              {isLoggedIn ? "登出" : "登入"}
+              {/* <User className="h-5 w-5" /> */}
+              {isLoggedIn ? <LogOut className="h-5 w-5"/> : <LogIn className="h-5 w-5"/>}
             </Button>
 
             {/* 登入 Dialog */}

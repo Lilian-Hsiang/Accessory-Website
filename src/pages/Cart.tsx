@@ -253,7 +253,7 @@ const Cart = () => {
 
                 <div className="mt-4 text-center">
                   <Link
-                    to="/products/necklaces"
+                    to="/"
                     className="text-sm text-primary hover:underline"
                   >
                     繼續購物

@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Product } from "@/types/product.ts";
 import { useCart } from "@/contexts/CartContext";
@@ -12,12 +13,15 @@ interface ProductCardProps {
   product: Product;
 }
 
+
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  // const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
   const { addToCart } = useCart();
   // 收藏
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const { id, name, price, images, category } = product;
-
+  
   // 處理加入購物車事件
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -41,7 +45,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   // };
 
   // 檢查是否已收藏 / 將產品ID轉為字串以匹配收藏存儲格式
-  const isProductFavorite = () => isFavorite(String(id));
+  const isProductFavorite = () => {
+    // const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    return isLoggedIn && isFavorite(String(id)); // 只有登入時才顯示收藏狀態
+  };
 
   // 處理收藏切換事件
   const handleToggleFavorite = (e: React.MouseEvent) => {
@@ -83,7 +90,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
           {/* 愛心收藏按鈕 */}
           <button
-            onClick={handleToggleFavorite}
+            onClick={(e) => {
+              const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // 確保每次都檢查最新狀態
+              if (!isLoggedIn) {
+                e.preventDefault();
+                e.stopPropagation();
+                alert("請先登入會員才能使用收藏功能！");
+                return;
+              }
+              handleToggleFavorite(e);
+            }}
             className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-200 shadow-sm z-50"
             aria-label={isProductFavorite() ? "移除收藏" : "加入收藏"}
           >
@@ -149,5 +165,7 @@ const categoryName = (category: string): string => {
 
   return nameMap[category] || "Jewelry";
 };
+
+
 
 export default ProductCard;

@@ -146,7 +146,7 @@ const OrderConfirmationPage = () => {
               </Button>
 
               <Button
-                onClick={() => navigate("/products/necklaces")}
+                onClick={() => navigate("/")}
                 className="flex-1 sm:flex-auto"
               >
                 繼續購物

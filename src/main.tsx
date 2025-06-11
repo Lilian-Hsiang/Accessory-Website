@@ -6,7 +6,11 @@ import { CartProvider } from "./contexts/CartContext";
 import { CheckoutProvider } from "./contexts/CheckoutContext";
 import { getStoredCart } from "./lib/cartStorage";
 import { FavoritesProvider } from "./contexts/FavoritesContext";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons"; // Solid 圖示
+import { fab } from "@fortawesome/free-brands-svg-icons"; // Brands 圖示
 
+library.add(fas, fab); // 將圖示加入到 library
 
 // 購物車診斷功能
 const CART_STORAGE_KEY = "elegant_jewelry_cart";

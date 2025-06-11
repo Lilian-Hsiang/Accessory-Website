@@ -17,9 +17,12 @@ import {
   Share2,
   Truck,
   Shield,
-  RotateCw,
+  RotateCw
 } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquareFacebook, faSquareXTwitter, faLine, faSquareWhatsapp, faSquarePinterest } from "@fortawesome/free-brands-svg-icons";
 import { toast } from "sonner";
+import { useFavorites } from "@/contexts/FavoritesContext";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string; category: string }>();
@@ -28,7 +31,43 @@ const ProductDetail = () => {
   const [selectedImage, setSelectedImage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const { addToCart } = useCart();
+  const { addToFavorites, isFavorite } = useFavorites();
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
   const navigate = useNavigate();
+
+  const handleShare = (platform: string) => {
+    const shareUrl = window.location.href; // 取得當前頁面的 URL
+    let platformUrl = "";
+
+    switch (platform) {
+      case "facebook":
+        platformUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+        break;
+      case "twitter":
+        platformUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`;
+        break;
+      case "line":
+        platformUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}`;
+        break;
+      case "whatsapp":
+        platformUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareUrl)}`;
+        break;
+      case "pinterest":
+        platformUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(shareUrl)}&media=${encodeURIComponent(product?.images[0])}&description=${encodeURIComponent(product?.name || "")}`;
+        break;
+      case "copy":
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          toast.success("網址已複製到剪貼簿！");
+        }).catch(() => {
+          toast.error("複製網址失敗，請稍後再試！");
+        });
+        return;
+      default:
+        return;
+    }
+
+    window.open(platformUrl, "_blank"); // 開啟分享頁面
+  };
 
   // 確保購物車同步
   useInitCartSync();
@@ -93,7 +132,17 @@ const ProductDetail = () => {
   // 處理收藏
   const handleWishlist = () => {
     if (product) {
-      toast.success(`已將 ${product.name} 加入收藏`);
+      try {
+        if (isFavorite(String(product.id))) {
+          toast.info(`${product.name} 已在收藏列表中`);
+        } else {
+          addToFavorites(product);
+          toast.success(`已將 ${product.name} 加入收藏`);
+        }
+      } catch (error) {
+        console.error("加入收藏失敗:", error);
+        toast.error("加入收藏失敗，請稍後再試");
+      }
     }
   };
 
@@ -254,15 +303,92 @@ const ProductDetail = () => {
                 onClick={handleWishlist}
                 className="w-10 h-10 rounded-full border border-gray-300"
               >
-                <Heart className="h-4 w-4" />
+                <Heart 
+                  className={`h-4 w-4 transition-colors duration-200 ${
+                    isFavorite(String(product?.id))
+                      ? "fill-red-500 text-red-500"
+                      : "text-gray-400 hover:text-red-400"
+                  }`}
+                />
               </Button>
               <Button
                 variant="ghost"
                 size="icon"
                 className="w-10 h-10 rounded-full border border-gray-300"
+                onClick={() => setShareDialogOpen(true)}
               >
                 <Share2 className="h-4 w-4" />
               </Button>
+
+            {/* 分享 Dialog */}
+            {shareDialogOpen && (
+              <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+                <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg relative">
+                  <button
+                    className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+                    onClick={() => setShareDialogOpen(false)}
+                  >
+                    ✕
+                  </button>
+                  <h2 className="text-lg font-medium mb-4 text-center">分享至</h2>
+                  <div className="grid grid-cols-3 gap-4">
+                    {/* Facebook */}
+                    <button
+                      className="flex flex-col items-center justify-center p-4 bg-[#8A9BAE] text-white rounded-lg hover:bg-[#7A8B9E] transition"
+                      onClick={() => handleShare("facebook")}
+                    >
+                      <FontAwesomeIcon icon={faSquareFacebook} className="text-2xl" />
+                      <strong className="text-sm mt-2">Facebook</strong>
+                    </button>
+
+                    {/* Twitter */}
+                    <button
+                      className="flex flex-col items-center justify-center p-4 bg-[#9AAEBE] text-white rounded-lg hover:bg-[#8A9EAE] transition"
+                      onClick={() => handleShare("twitter")}
+                    >
+                      <FontAwesomeIcon icon={faSquareXTwitter} className="text-2xl" />
+                      <strong className="text-sm mt-2">Twitter</strong>
+                    </button>
+
+                    {/* LINE */}
+                    <button
+                      className="flex flex-col items-center justify-center p-4 bg-[#A3B8A8] text-white rounded-lg hover:bg-[#93A898] transition"
+                      onClick={() => handleShare("line")}
+                    >
+                      <FontAwesomeIcon icon={faLine} className="text-2xl" />
+                      <strong className="text-sm mt-2">LINE</strong>
+                    </button>
+
+                    {/* WhatsApp */}
+                    <button
+                      className="flex flex-col items-center justify-center p-4 bg-[#A3C4B4] text-white rounded-lg hover:bg-[#8FB3A3] transition"
+                      onClick={() => handleShare("whatsapp")}
+                    >
+                      <FontAwesomeIcon icon={faSquareWhatsapp} className="text-2xl" />
+                      <strong className="text-sm mt-2">WhatsApp</strong>
+                    </button>
+
+                    {/* Pinterest */}
+                    <button
+                      className="flex flex-col items-center justify-center p-4 bg-[#C8A3A3] text-white rounded-lg hover:bg-[#B89393] transition"
+                      onClick={() => handleShare("pinterest")}
+                    >
+                      <FontAwesomeIcon icon={faSquarePinterest} className="text-2xl" />
+                      <strong className="text-sm mt-2">Pinterest</strong>
+                    </button>
+
+                    {/* 複製網址 */}
+                    <button
+                      className="flex flex-col items-center justify-center p-4 bg-[#C8B8A8] text-black rounded-lg hover:bg-[#B8A898] transition"
+                      onClick={() => handleShare("copy")}
+                    >
+                      <FontAwesomeIcon icon="copy" className="text-2xl" />
+                      <span className="text-sm mt-2">複製網址</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
             </div>
 
             {/* 商品保證 */}
