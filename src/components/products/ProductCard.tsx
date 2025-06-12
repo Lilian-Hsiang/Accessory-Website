@@ -95,7 +95,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               if (!isLoggedIn) {
                 e.preventDefault();
                 e.stopPropagation();
-                alert("請先登入會員才能使用收藏功能！");
+                toast.error("請先登入會員才能使用收藏功能！");
                 return;
               }
               handleToggleFavorite(e);
@@ -115,7 +115,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {/* 快速加入購物車覆蓋層 */}
           <div className="absolute inset-0 z-10 bg-black bg-opacity-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
             <Button
-              onClick={handleAddToCart}
+              onClick={(e)=> {
+                const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // 確保每次都檢查最新狀態
+                if (!isLoggedIn) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toast.error("請先登入會員才能使用購物車功能！");
+                  return;
+                }
+                handleAddToCart(e);
+              }}
               size="sm"
               className="bg-white text-gray-800 hover:bg-[#C0A062] hover:text-white rounded-full"
             >

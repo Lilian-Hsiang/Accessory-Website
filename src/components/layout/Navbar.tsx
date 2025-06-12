@@ -256,6 +256,41 @@ const Navbar = () => {
           </div>
         </CollapsibleContent>
       </Collapsible>
+      {/* 幫助中心下拉選單 */}
+      <Collapsible className="w-full">
+        <CollapsibleTrigger className="flex w-full px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:text-[#C0A062] justify-between items-center">
+          <span>幫助中心</span>
+          <span>▼</span>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="pl-4 border-l border-gray-100 ml-3 mt-1">
+          <div className="flex flex-col space-y-1">
+            <NavLink
+              to="/help/buying-guide"
+              label="購買指南"
+              isActive={isActive("/help/buying-guide")}
+              onClick={closeMobileMenu}
+            />
+            <NavLink
+              to="/help/return-policy"
+              label="退換貨政策"
+              isActive={isActive("/help/return-policy")}
+              onClick={closeMobileMenu}
+            />
+            <NavLink
+              to="/help/payment-methods"
+              label="付款方式"
+              isActive={isActive("/help/payment-methods")}
+              onClick={closeMobileMenu}
+            />
+            <NavLink
+              to="/help/faq"
+              label="常見問題"
+              isActive={isActive("/help/faq")}
+              onClick={closeMobileMenu}
+            />
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
     </div>
   );
 
@@ -380,7 +415,7 @@ const Navbar = () => {
               onClick={(e) => {
                 if (!isLoggedIn) {
                   e.preventDefault();
-                  alert("請先登入才能使用收藏功能！");
+                  toast.error("請先登入才能使用收藏功能！");
                 }
               }}
             >
@@ -407,7 +442,7 @@ const Navbar = () => {
               onClick={(e) => {
                 if (!isLoggedIn) {
                   e.preventDefault();
-                  alert("請先登入才能使用購物車功能！");
+                  toast.error("請先登入才能使用購物車功能！");
                 }
               }}
             >
