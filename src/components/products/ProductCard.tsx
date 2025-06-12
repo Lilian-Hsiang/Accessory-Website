@@ -58,14 +58,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     try {
       if (isProductFavorite()) {
         removeFromFavorites(String(id));
-        alert(`已將 ${name} 從收藏中移除`);
+        toast.success(`已將 ${name} 從收藏中移除`);
       } else {
         addToFavorites(product);
-        alert(`已將 ${name} 加入收藏`);
+        toast.success(`已將 ${name} 加入收藏`);
       }
     } catch (error) {
       console.error("收藏操作失敗:", error);
-      alert("收藏操作失敗，請稍後再試");
+      toast.error("收藏操作失敗，請稍後再試");
     }
   };
 
