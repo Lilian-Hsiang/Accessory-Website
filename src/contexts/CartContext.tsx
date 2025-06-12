@@ -12,7 +12,6 @@ import {
   storeCart,
   clearStoredCart,
   validateCart,
-  debugLocalStorage,
 } from "@/lib/cartStorage";
 
 // 購物車項目類型
@@ -194,6 +193,11 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     console.log("清空購物車");
     setItems([]);
     clearStoredCart();
+     try {
+      localStorage.removeItem("elegant_jewelry_cart"); // 清空本地存儲
+    } catch (error) {
+      console.error("清空購物車localStorage失敗:", error);
+    }
   }, []);
 
   // 計算購物車中的總項目數

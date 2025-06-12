@@ -13,7 +13,7 @@ import { useFavorites } from "@/contexts/FavoritesContext";
 import { Heart } from "lucide-react";
 import { users } from "@/data/users";
 import { toast } from "sonner";
-const { getFavoritesCount, clearFavorites } = useFavorites();
+
 // import { getAllProducts } from "@/data/products"
 
 interface NavLinkProps {
@@ -38,9 +38,10 @@ const NavLink = ({ to, label, isActive, onClick }: NavLinkProps) => (
 
 // 導航欄元件
 const Navbar = () => {
+  const { getFavoritesCount, clearFavorites } = useFavorites();
+  const { clearCart } = useCart();
   const location = useLocation();
   const { getTotalItems } = useCart();
-  const { getFavoritesCount } = useFavorites();
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [mobileSheetOpen, setMobileSheetOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
@@ -73,7 +74,8 @@ const Navbar = () => {
     // localStorage.removeItem("elegant_jewelry_favorites"); // 移除收藏
     localStorage.removeItem("favorites");
     localStorage.removeItem("elegant_jewelry_cart"); // 移除購物車
-    clearFavorites(); 
+    clearFavorites(); // 清空收藏
+    clearCart(); // 清空購物車
     toast.success("登出成功！");
     window.dispatchEvent(new Event("storage")); // 通知其他元件更新
   };
