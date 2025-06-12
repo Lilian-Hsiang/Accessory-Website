@@ -126,20 +126,20 @@ const ProductsPage = () => {
         <div className="container mx-auto px-4">
           {/* 產品過濾與排序 */}
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-            <button
+            {/* <button
               onClick={() => setShowFilters(!showFilters)}
               className="flex items-center gap-2 text-sm border border-gray-300 rounded-full py-2 px-4 md:hidden"
             >
               <Filter className="h-4 w-4" />
               篩選
-            </button>
+            </button> */}
 
             {/* 桌面版篩選器 */}
-            <div className="hidden md:flex items-center gap-6">
+            {/* <div className="hidden md:flex items-center gap-6">
               <div className="text-sm font-medium">價格範圍</div>
               <div className="text-sm font-medium">材質</div>
               <div className="text-sm font-medium">設計風格</div>
-            </div>
+            </div> */}
 
             <div className="flex items-center">
               <label htmlFor="sort" className="mr-2 text-sm text-gray-600">
@@ -154,14 +154,14 @@ const ProductsPage = () => {
                 <option value="default">預設排序</option>
                 <option value="price-low">價格：低至高</option>
                 <option value="price-high">價格：高至低</option>
-                <option value="name-asc">名稱：A-Z</option>
-                <option value="name-desc">名稱：Z-A</option>
+                {/* <option value="name-asc">名稱：A-Z</option>
+                <option value="name-desc">名稱：Z-A</option> */}
               </select>
             </div>
           </div>
 
           {/* 移動版篩選面板 */}
-          {showFilters && (
+          {/* {showFilters && (
             <div className="bg-white p-4 rounded-lg shadow-md mb-6 md:hidden">
               <h3 className="font-medium mb-3">篩選選項</h3>
               <div className="space-y-4">
@@ -213,7 +213,7 @@ const ProductsPage = () => {
                 </button>
               </div>
             </div>
-          )}
+          )} */}
 
           {/* 產品網格 */}
           {paginatedProducts.length > 0 ? (
